@@ -10,7 +10,7 @@ public class FindWay : MonoBehaviour
     private List<Grid> openList = new List<Grid>();
     private List<Grid> closeList = new List<Grid>();
 
-    public GameObject roadSignPrefab;
+    public GameObject temp;
 
     private void Awake()
     {
@@ -43,7 +43,7 @@ public class FindWay : MonoBehaviour
             neighborGrids = MapManager.Instance.GetAroundGrids(grid);
             for (int i = 0; i < neighborGrids.Count; i++) 
             {
-                if (neighborGrids[i].GetUseFul() && !closeList.Contains(neighborGrids[i])) 
+                if ((neighborGrids[i].GetUseFul() || neighborGrids[i].food) && !closeList.Contains(neighborGrids[i])) 
                 {
                     cost = (neighborGrids[i].GetPos() - grid.GetPos()).magnitude == 1 ? 10 : 14;
                     if (openList.Contains(neighborGrids[i]))
@@ -68,13 +68,20 @@ public class FindWay : MonoBehaviour
             closeList.Add(grid);
         }
 
+        openList.Clear();
+        closeList.Clear();
+
         if (find) 
         while (grid!= sGrid) 
         {
             wayPoints.Add(grid.GetPos());
             grid = grid.parentGrid;
         }
-        wayPoints.Add(sGrid.GetPos());
+        else
+        {
+            Debug.Log("can't find way");
+        }
+        //wayPoints.Add(sGrid.GetPos());
         return wayPoints;
     }
 
@@ -88,4 +95,6 @@ public class FindWay : MonoBehaviour
         }
         return minGrid;
     }
+
+
 }

@@ -11,13 +11,14 @@ public class SnakeControl : MonoBehaviour
     [HideInInspector] public List<Body> snake = new List<Body>();
 
     public int length, foodLength, grasslength;
-    public float space, energySpeed, speedUpTime, commonSpeed, powerTime;
-    public bool tailDocking;
+    public float space, energySpeed, speedUpTime, commonSpeed, powerTime, autoTime;
+    public bool tailDocking, autoFindFood = false;
     [HideInInspector] public float speed;
-    public float mapScale, cameraScale, addNum;
-    private Vector2 moveDirect = Vector2.zero, movePos = Vector2.zero;
+    private Vector2 moveDirect = Vector2.zero;
+    [HideInInspector] public Vector2 movePos = Vector2.zero;
     [HideInInspector] public int posIndex = 0;
     [HideInInspector] public bool startMove = false;
+    Vector2 direction = Vector2.zero;
     void Awake()
     {
         _instance = this;
@@ -37,7 +38,7 @@ public class SnakeControl : MonoBehaviour
     {
         if(startMove)
         {
-            SnakeMoveControl(false);
+            SnakeMoveControl(autoFindFood);
             cameraControl();
         }       
     }
@@ -49,7 +50,7 @@ public class SnakeControl : MonoBehaviour
         snake[0].ShowBody();
         for (int i = 1; i < length; i++) 
         {
-            pos -= new Vector2(0.0f, space);
+            pos -= new Vector2(0.0f, space + 0.1f);
             snake.Add(new Body(gameObject, bodyPrefab, pos));
             snake[i].ShowBody();
         }
@@ -58,29 +59,28 @@ public class SnakeControl : MonoBehaviour
     void directControl()
     {
         moveDirect = (movePos - snake[0].GetCurrentPos()).normalized;
-        Debug.Log("direct: " + moveDirect);
-        Debug.Log("snake pos: " + snake[0].GetCurrentPos());
     }
 
     void PosControl()
     {
-        if ((snake[0].GetCurrentPos() - MapManager.Instance.points[posIndex]).magnitude < 0.1f) 
+        if (posIndex >= 0 && (snake[0].GetCurrentPos() - MapManager.Instance.points[posIndex]).magnitude < 0.1f) 
         {
+            DrawLine.Instance.Draw();
             if (posIndex > 0) posIndex--;
             movePos = MapManager.Instance.points[posIndex];
-            Debug.Log("Pos: " + movePos);
         }
     }
 
-    void SnakeMoveControl(bool mouse)
+    void SnakeMoveControl(bool autoFindFood)
     {
-        Vector2 direction = Vector2.zero;
-        if (mouse)
+        if (!autoFindFood)
         {
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
             Vector3 mouseScreenPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, pos.z);
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
-            direction = (new Vector2(mouseWorldPos.x, mouseWorldPos.y) - snake[0].pos).normalized;
+            Vector3 diff = new Vector2(mouseWorldPos.x, mouseWorldPos.y) - snake[0].pos;
+            if (diff.magnitude > 1.0f)
+                direction = diff.normalized;
             SnakeMove(direction);
         }
         else
@@ -90,6 +90,8 @@ public class SnakeControl : MonoBehaviour
             direction = moveDirect;
             if ((snake[0].GetCurrentPos() - MapManager.Instance.points[0]).magnitude > 0.1f)
                 SnakeMove(direction);
+            if (DrawLine.Instance.linePos.Count > 0) 
+                DrawLine.Instance.lineRenderer.SetPosition(DrawLine.Instance.linePos.Count - 1, snake[0].GetCurrentVector3Pos());
         }
         
     }
@@ -105,20 +107,18 @@ public class SnakeControl : MonoBehaviour
             Vector2 basePos = tailDocking ? snake[i - 1].pos : snake[i - 1].GetCurrentPos();
             snake[i].pos = basePos + direct * space;
             snake[i].move();
-        }
-        
+        }        
     }
 
     void cameraControl()
     {
         float cameraX, cameraY;
         Vector2 cameraCurrentPos = new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.y);
-        cameraX = Mathf.Abs(snake[0].pos.x) < mapScale - cameraScale * (Camera.main.pixelWidth / 100) + addNum ? Mathf.Abs(snake[0].pos.x) : mapScale - cameraScale * (Camera.main.pixelWidth / 100) + addNum;
-        cameraY = Mathf.Abs(snake[0].pos.y) < mapScale - cameraScale * (Camera.main.pixelHeight / 100) + addNum ? Mathf.Abs(snake[0].pos.y) : mapScale - cameraScale * (Camera.main.pixelHeight / 100) + addNum;
+        cameraX = Mathf.Abs(snake[0].pos.x) < MapManager.Instance.mapScale - (Camera.main.pixelWidth / 100) ? Mathf.Abs(snake[0].pos.x) : MapManager.Instance.mapScale - (Camera.main.pixelWidth / 100);
+        cameraY = Mathf.Abs(snake[0].pos.y) < MapManager.Instance.mapScale - (Camera.main.pixelHeight / 100) ? Mathf.Abs(snake[0].pos.y) : MapManager.Instance.mapScale - (Camera.main.pixelHeight / 100);
         if (snake[0].pos.x < 0) cameraX = -cameraX;
         if (snake[0].pos.y < 0) cameraY = -cameraY;
-        if ((cameraCurrentPos - snake[0].GetCurrentPos()).magnitude > 1.5f)
-            Camera.main.transform.Translate((snake[0].GetCurrentPos() - cameraCurrentPos).normalized * Time.deltaTime * speed);
+        Camera.main.transform.position = new Vector3(Mathf.Lerp(Camera.main.transform.position.x, cameraX, Time.deltaTime * speed), Mathf.Lerp(Camera.main.transform.position.y, cameraY, Time.deltaTime * speed), Camera.main.transform.position.z);
     }
 
     public void AddBody(int count)

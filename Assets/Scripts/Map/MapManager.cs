@@ -9,12 +9,12 @@ public class MapManager : MonoBehaviour
 
     public GameObject[] propPrefabs;
     public GameObject[] wallPrefabs;
+    public List<GameObject> foods = new List<GameObject>();
     public GameObject wallParentPrefab, propParentPrefab;
     public int mapScale, badGrassCount, foodCount, sheildCount, boomCount, mushCount, energyCount, smartGrassCount;
     public int wallCountAverage;
     public Grid[,] Grids;
     private List<Wall>[] Walls;
-    public GameObject temp, tempEnd, tempInit;
     [HideInInspector] public Vector2 endPos = Vector2.zero;
     [HideInInspector] public List<Vector2> points = new List<Vector2>();
 
@@ -32,7 +32,6 @@ public class MapManager : MonoBehaviour
 
     void Start()
     {
-        RandomEndPosTest();
         SnakeControl.Instance.startMove = true;
     }
 
@@ -41,32 +40,36 @@ public class MapManager : MonoBehaviour
 
     }
 
-
-    public void RandomEndPosTest()
+    public void updatePoints()
     {
-        Vector2 endPos = new Vector2(Random.Range(-mapScale + 2, mapScale - 2), Random.Range(-mapScale + 2, mapScale - 2));
-        while (!Grids[(int)endPos.x + 40, (int)endPos.y + 40].GetUseFul())
-            endPos = new Vector2(Random.Range(-mapScale + 2, mapScale - 2), Random.Range(-mapScale + 2, mapScale - 2));
-        GameObject.Instantiate(tempEnd, endPos, Quaternion.identity);
-        GetWayPoints(Vector2.zero, endPos);
+        GameObject nearestFood = foods[0];
+        for (int i = 1; i < foods.Count; i++)
+        {
+            if (GetDisFromSnake(foods[i]) < GetDisFromSnake(nearestFood))
+                nearestFood = foods[i];
+        }
+        points.Clear();
+        SetWayPoints(SnakeControl.Instance.snake[0].GetCurrentPos(), new Vector2(nearestFood.transform.position.x, nearestFood.transform.position.y));
+        SnakeControl.Instance.posIndex = points.Count - 1;
+        SnakeControl.Instance.movePos = points[points.Count - 1];
+        DrawLine.Instance.SetVector3Pos(points);
     }
 
-    void GetWayPoints(Vector2 stt, Vector2 end)
+    float GetDisFromSnake(GameObject prop)
+    {
+        Vector2 twoPos = new Vector2(prop.transform.position.x, prop.transform.position.y);
+        return (SnakeControl.Instance.snake[0].GetCurrentPos() - twoPos).magnitude;
+    }
+
+    void SetWayPoints(Vector2 stt, Vector2 end)
     {
         points = FindWay.Instance.GetWay(Grids[(int)stt.x + 40, (int)stt.y + 40], Grids[(int)end.x + 40, (int)end.y + 40]);
-        for (int i = points.Count - 1; i >= 0; i--)
-        {
-            GameObject.Instantiate(temp, points[i], Quaternion.identity);
-        }
         shortenWay(1.2f);
         shortenWay(2.1f);
         shortenWay(3.1f);
-        SnakeControl.Instance.posIndex = points.Count - 1;
-        for (int i = points.Count - 1; i >= 0; i--)
-        {
-            GameObject.Instantiate(tempInit, points[i], Quaternion.identity);
-        }
+       
     }
+       
 
     void shortenWay(float distance)
     {
@@ -208,6 +211,7 @@ public class MapManager : MonoBehaviour
         RandomProp(mushCount, propPrefabs[3]);
         RandomProp(badGrassCount, propPrefabs[4]);
         RandomProp(sheildCount, propPrefabs[5]);
+        RandomProp(smartGrassCount, propPrefabs[6]);
     }
 
     public void RandomProp(int count, GameObject prop)
@@ -215,11 +219,18 @@ public class MapManager : MonoBehaviour
         Vector2 propPos;
         for (int i = 0; i < count; i++) 
         {
-            propPos = new Vector2(Random.Range(-mapScale, mapScale), Random.Range(-mapScale, mapScale));
+            propPos = new Vector2(Random.Range(-mapScale + 2, mapScale - 2), Random.Range(-mapScale + 2, mapScale - 2));
             while (!Grids[(int)propPos.x + 40,(int)propPos.y + 40].GetUseFul())
-                propPos = new Vector2(Random.Range(-mapScale, mapScale), Random.Range(-mapScale, mapScale));
+                propPos = new Vector2(Random.Range(-mapScale + 2, mapScale - 2), Random.Range(-mapScale, mapScale));
             Grids[(int)propPos.x + 40, (int)propPos.y + 40].SetUseFul(false);
-            GameObject.Instantiate(prop, propPos, Quaternion.identity).transform.SetParent(propParentPrefab.transform);
+            GameObject newProp = GameObject.Instantiate(prop, propPos, Quaternion.identity);
+            newProp.transform.SetParent(propParentPrefab.transform, false);
+            if (prop == propPrefabs[2])
+            {
+                foods.Add(newProp);
+                Grids[(int)propPos.x + 40, (int)propPos.y + 40].food = true;
+            }
+                
         }
     }
 

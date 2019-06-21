@@ -12,6 +12,7 @@ TagManager:
   - sheild
   - wall
   - head
+  - SmartGrass
   layers:
   - Default
   - TransparentFX
@@ -48,4 +49,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Line
+    uniqueID: 3371006239
     locked: 0

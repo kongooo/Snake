@@ -6,9 +6,9 @@ public class Grid
 {
     private Vector2 pos;
     private bool useFul;
+    public bool food = false;
     public int Scost, Ecost, indexX, indexY;
     public Grid parentGrid;
-    public string tempStr = "baga";
 
     public Grid(Vector2 pos)
     {

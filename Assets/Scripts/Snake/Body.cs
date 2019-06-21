@@ -26,10 +26,14 @@ public class Body : MonoBehaviour
     public void move()
     {
         newBody.GetComponent<Rigidbody2D>().MovePosition(pos);
-        //newBody.transform.position = pos;
     }
 
     public Vector2 GetCurrentPos()
+    {
+        return newBody.transform.position;
+    }
+
+    public Vector3 GetCurrentVector3Pos()
     {
         return newBody.transform.position;
     }
@@ -39,43 +43,54 @@ public class Body : MonoBehaviour
         newBody.transform.rotation = Quaternion.FromToRotation(Vector2.up, direction);
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    int type = 0;
-    //    switch (collision.tag)
-    //    {
-    //        case "food":
-    //            SnakeControl.Instance.AddBody(SnakeControl.Instance.foodLength);
-    //            type = 2;
-    //            break;
-    //        case "grass":
-    //            if(!power) SnakeControl.Instance.DeleteBody(SnakeControl.Instance.grasslength);
-    //            type = 4;
-    //            break;
-    //        case "mush":
-    //            SnakeControl.Instance.AddBody(SnakeControl.Instance.snake.Count);
-    //            type = 3;
-    //            break;
-    //        case "boom":
-    //            if (!power) SnakeControl.Instance.DeleteBody(SnakeControl.Instance.snake.Count / 2);
-    //            type = 0;
-    //            break;
-    //        case "energy":
-    //            SnakeControl.Instance.speed = SnakeControl.Instance.energySpeed;
-    //            Invoke("recoverSpeed", SnakeControl.Instance.speedUpTime);
-    //            type = 1;
-    //            break;
-    //        case "sheild":
-    //            power = true;
-    //            Invoke("recoverPower", SnakeControl.Instance.powerTime);
-    //            type = 5;
-    //            break;
-    //    }
-    //    int x = (int)collision.transform.position.x + 40, y = (int)collision.transform.position.y + 40;
-    //    MapManager.Instance.Grids[x, y].SetUseFul(true);
-    //    Destroy(collision.gameObject);
-    //    MapManager.Instance.RandomProp(1, MapManager.Instance.propPrefabs[type]);
-    //}
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        int type = 0;
+        Destroy(collision.gameObject);
+        switch (collision.tag)
+        {
+            case "food":
+                SnakeControl.Instance.AddBody(SnakeControl.Instance.foodLength);
+                MapManager.Instance.foods.Remove(collision.gameObject);
+                if(SnakeControl.Instance.autoFindFood)
+                {
+                    MapManager.Instance.updatePoints();
+                }
+                type = 2;
+                break;
+            case "grass":
+                if (!power) SnakeControl.Instance.DeleteBody(SnakeControl.Instance.grasslength);
+                type = 4;
+                break;
+            case "mush":
+                SnakeControl.Instance.AddBody(SnakeControl.Instance.snake.Count);
+                type = 3;
+                break;
+            case "boom":
+                if (!power) SnakeControl.Instance.DeleteBody(SnakeControl.Instance.snake.Count / 2);
+                type = 0;
+                break;
+            case "energy":
+                SnakeControl.Instance.speed = SnakeControl.Instance.energySpeed;
+                Invoke("recoverSpeed", SnakeControl.Instance.speedUpTime);
+                type = 1;
+                break;
+            case "sheild":
+                power = true;
+                Invoke("recoverPower", SnakeControl.Instance.powerTime);
+                type = 5;
+                break;
+            case "SmartGrass":
+                MapManager.Instance.updatePoints();
+                SnakeControl.Instance.autoFindFood = true;
+                Invoke("recoverAuto", SnakeControl.Instance.autoTime);
+                type = 6;
+                break;
+        }
+        int x = (int)collision.transform.position.x + 40, y = (int)collision.transform.position.y + 40;
+        MapManager.Instance.Grids[x, y].SetUseFul(true);        
+        MapManager.Instance.RandomProp(1, MapManager.Instance.propPrefabs[type]);
+    }
 
     private void recoverSpeed()
     {
@@ -85,6 +100,12 @@ public class Body : MonoBehaviour
     private void recoverPower()
     {
         power = false;
+    }
+
+    private void recoverAuto()
+    {
+        SnakeControl.Instance.autoFindFood = false;
+        DrawLine.Instance.lineRenderer.positionCount = 0;
     }
 }
 
