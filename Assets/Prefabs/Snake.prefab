@@ -45,5 +45,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyPrefab: {fileID: 4297138117789259192, guid: 76d415731686b8d4ab5511f4e1c6a563,
     type: 3}
-  length: 10
-  space: 0.1
+  headPrefab: {fileID: 1756319003162467634, guid: 642ab3da53a687141bc1e128949fbdec,
+    type: 3}
+  snake: []
+  length: 5
+  foodLength: 2
+  grasslength: 2
+  space: 0.2
+  energySpeed: 7
+  speedUpTime: 2
+  commonSpeed: 5
+  powerTime: 5
+  autoTime: 20
+  tailDocking: 0
+  autoFindFood: 0
+  speed: 0.05
+  movePos: {x: 0, y: 0}
+  posIndex: 0
+  startMove: 0

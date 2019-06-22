@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SnakeControl : MonoBehaviour
 {
@@ -17,11 +18,16 @@ public class SnakeControl : MonoBehaviour
     private Vector2 moveDirect = Vector2.zero;
     [HideInInspector] public Vector2 movePos = Vector2.zero;
     [HideInInspector] public int posIndex = 0;
-    [HideInInspector] public bool startMove = false;
+    public bool startMove = false;
     Vector2 direction = Vector2.zero;
+    private float cameraWidth = 0, cameraHeight = 0;
+
+    public int HP;
+
     void Awake()
     {
         _instance = this;
+        InitCameraSize();
         SnakeInit();
     }
     private void Start()
@@ -36,11 +42,21 @@ public class SnakeControl : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         if(startMove)
         {
             SnakeMoveControl(autoFindFood);
             cameraControl();
         }       
+    }
+
+    void InitCameraSize()
+    {
+        var leftDown = Camera.main.ViewportToWorldPoint(Vector3.zero);
+        var rightUp = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 0));
+        cameraWidth = (rightUp.x - leftDown.x) / 2;
+        cameraHeight = (rightUp.y - leftDown.y) / 2;
+        Debug.Log(cameraWidth + " " + cameraHeight);
     }
 
     void SnakeInit()
@@ -114,19 +130,25 @@ public class SnakeControl : MonoBehaviour
     {
         float cameraX, cameraY;
         Vector2 cameraCurrentPos = new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.y);
-        cameraX = Mathf.Abs(snake[0].pos.x) < MapManager.Instance.mapScale - (Camera.main.pixelWidth / 100) ? Mathf.Abs(snake[0].pos.x) : MapManager.Instance.mapScale - (Camera.main.pixelWidth / 100);
-        cameraY = Mathf.Abs(snake[0].pos.y) < MapManager.Instance.mapScale - (Camera.main.pixelHeight / 100) ? Mathf.Abs(snake[0].pos.y) : MapManager.Instance.mapScale - (Camera.main.pixelHeight / 100);
+        
+        cameraX = Mathf.Abs(snake[0].GetCurrentPos().x) < 40 - cameraWidth ? Mathf.Abs(snake[0].GetCurrentPos().x) : 40- cameraWidth;
+        cameraY = Mathf.Abs(snake[0].GetCurrentPos().y) < 40 - cameraHeight ? Mathf.Abs(snake[0].GetCurrentPos().y) : 40 - cameraHeight;
         if (snake[0].pos.x < 0) cameraX = -cameraX;
         if (snake[0].pos.y < 0) cameraY = -cameraY;
+
         Camera.main.transform.position = new Vector3(Mathf.Lerp(Camera.main.transform.position.x, cameraX, Time.deltaTime * speed), Mathf.Lerp(Camera.main.transform.position.y, cameraY, Time.deltaTime * speed), Camera.main.transform.position.z);
+        //if (autoFindFood)
+        //    Camera.main.transform.position = new Vector3(Mathf.Lerp(Camera.main.transform.position.x, cameraX, Time.deltaTime * speed), Mathf.Lerp(Camera.main.transform.position.y, cameraY, Time.deltaTime * speed), Camera.main.transform.position.z);
+        //else
+        //    Camera.main.transform.position = new Vector3(cameraX, cameraY, Camera.main.transform.position.z);
     }
 
     public void AddBody(int count)
     {
         for (int i = 0; i < count; i++) 
         {
-            Vector2 newPos = 2 * snake[snake.Count - 1].pos - snake[snake.Count - 2].pos;
-            snake.Add(new Body(gameObject, bodyPrefab, newPos));
+            //Vector2 newPos = 2 * snake[snake.Count - 1].pos - snake[snake.Count - 2].pos;
+            snake.Add(new Body(gameObject, bodyPrefab, snake[snake.Count-1].pos));
             snake[snake.Count - 1].ShowBody();
         }      
     }

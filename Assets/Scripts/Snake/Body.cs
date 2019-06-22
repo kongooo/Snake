@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Body : MonoBehaviour
 {
@@ -86,10 +87,22 @@ public class Body : MonoBehaviour
                 Invoke("recoverAuto", SnakeControl.Instance.autoTime);
                 type = 6;
                 break;
+            case "key":
+                Destroy(GameObject.FindGameObjectWithTag("lockedDoor"));
+                break;
+            case "gaff":
+                SnakeControl.Instance.DeleteBody(1);
+                break;
+            case "monster":
+                SnakeControl.Instance.DeleteBody(1);
+                break;
         }
-        int x = (int)collision.transform.position.x + 40, y = (int)collision.transform.position.y + 40;
-        MapManager.Instance.Grids[x, y].SetUseFul(true);        
-        MapManager.Instance.RandomProp(1, MapManager.Instance.propPrefabs[type]);
+        if (SceneManager.GetActiveScene().name == "Scene0") 
+        {
+            int x = (int)collision.transform.position.x + 40, y = (int)collision.transform.position.y + 40;
+            MapManager.Instance.Grids[x, y].SetUseFul(true);
+            MapManager.Instance.RandomProp(1, MapManager.Instance.propPrefabs[type]);
+        }       
     }
 
     private void recoverSpeed()
