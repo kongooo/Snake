@@ -9,6 +9,7 @@ public class DiamondControl : MonoBehaviour
     public int min, max;
     private float timing = 0;
 
+
     void Update()
     {
         timing += Time.deltaTime;

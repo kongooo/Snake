@@ -7,7 +7,7 @@ public class Diamond : MonoBehaviour
 {
     public TextMeshProUGUI Text;
     [HideInInspector]public int min, max;
-    [HideInInspector]public float speed;
+    [HideInInspector] public float speed;
 
     private void Awake()
     {
@@ -21,7 +21,7 @@ public class Diamond : MonoBehaviour
         if (transform.position.x < -12) Destroy(gameObject);
     }
 
-    void RandomNum()
+    public void RandomNum()
     {
         Text.text = Random.Range(min, max + 1).ToString();
     }
@@ -29,5 +29,11 @@ public class Diamond : MonoBehaviour
     void Move()
     {
         transform.Translate(Vector2.left * speed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "food")
+            Destroy(collision.gameObject);
     }
 }

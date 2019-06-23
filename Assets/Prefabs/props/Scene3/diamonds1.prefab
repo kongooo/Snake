@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7903337018396007151}
   - component: {fileID: 7903337018396007150}
   - component: {fileID: 7903337018396007149}
+  - component: {fileID: 8013018871525166888}
   m_Layer: 0
   m_Name: diamonds1
   m_TagString: diamond
@@ -124,6 +125,27 @@ MonoBehaviour:
   min: 1
   max: 20
   speed: 7
+--- !u!50 &8013018871525166888
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7903337018396007145}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 6
 --- !u!1 &7903337019689891257
 GameObject:
   m_ObjectHideFlags: 0
