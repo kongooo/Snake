@@ -18,6 +18,8 @@ TagManager:
   - lockedDoor
   - monster
   - diamond
+  - MoveFood
+  - line
   layers:
   - Default
   - TransparentFX

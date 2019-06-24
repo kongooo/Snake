@@ -36,7 +36,7 @@ public class FoodControl : MonoBehaviour
             temp.GetComponent<Diamond>().min = this.min;
             temp.GetComponent<Diamond>().max = this.max;
             temp.GetComponent<Diamond>().speed = this.speed;
-            temp.GetComponent<Diamond>().RandomNum();
+            temp.GetComponent<Diamond>().RandomNum(Random.Range(min,max));
         }
     }
 }

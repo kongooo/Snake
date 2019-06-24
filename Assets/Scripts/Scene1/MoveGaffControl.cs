@@ -5,12 +5,16 @@ using UnityEngine;
 public class MoveGaffControl : MonoBehaviour
 {
     public float distance, speed, intervalTime;
+    public int orderPerSecond,record=-1;
     private float timing = 0;
     private Vector3 rotate = Vector3.zero;
     public enum direct { up, down, left, right}
     public direct Direction;
     public GameObject moveGaff;
-
+    private void Start()
+    {
+        timing = intervalTime;
+    }
     void Update()
     {
         controlTime();
@@ -19,11 +23,17 @@ public class MoveGaffControl : MonoBehaviour
     void controlTime()
     {
         timing += Time.deltaTime;
-        if (timing >= intervalTime) 
+        float num2 = timing;
+        int num = Mathf.FloorToInt(timing * 10);
+        Debug.Log(num);
+        Debug.Log(timing);
+        if (num % orderPerSecond == 0&&num!=record)
         {
             moveControl();
             timing = 0;
+            record = num;
         }
+        timing = num2;
     }
 
     void initRotate()

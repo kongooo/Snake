@@ -22,12 +22,15 @@ public class DiamondControl : MonoBehaviour
 
     void init()
     {
+        int num = Random.Range(0, diamonds.Length);
         for (int i = 0; i < diamonds.Length; i++) 
         {
             GameObject diamond = Instantiate(diamonds[i], gameObject.transform, false);
             diamond.GetComponent<Diamond>().min = this.min;
             diamond.GetComponent<Diamond>().max = this.max;
             diamond.GetComponent<Diamond>().speed = this.speed;
+            num = i == num ? Random.Range(min, HorizontalMoveControl.Instance.snake.Count) : Random.Range(min, max);
+            diamond.GetComponent<Diamond>().RandomNum(num);
         }
     }
 

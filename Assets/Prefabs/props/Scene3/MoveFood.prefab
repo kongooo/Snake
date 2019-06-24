@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6825333577876537635}
   m_Layer: 0
   m_Name: MoveFood
-  m_TagString: food
+  m_TagString: MoveFood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,6 +113,7 @@ MonoBehaviour:
   Text: {fileID: 6825333577953820715}
   min: 0
   max: 0
+  randomNum: 0
   speed: 0
 --- !u!1 &6825333577717268554
 GameObject:

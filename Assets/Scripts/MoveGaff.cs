@@ -37,7 +37,7 @@ public class MoveGaff : MonoBehaviour
             case 90:
                 direction = Vector2.left;
                 break;
-            case -90:
+            case 270:
                 direction = Vector2.right;
                 break;
             case 180:

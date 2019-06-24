@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Body : MonoBehaviour
 {
-    private GameObject parent, body, newBody;
+    private GameObject parent, body;
+    [HideInInspector] public GameObject newBody;
     [HideInInspector] public Vector2 pos;
     private bool power = false;
     public Body(GameObject parent, GameObject body, Vector2 pos)
@@ -29,6 +30,12 @@ public class Body : MonoBehaviour
         newBody.GetComponent<Rigidbody2D>().MovePosition(pos);
     }
 
+    public void SetPos(Vector2 newPos)
+    {
+        newBody.transform.position = newPos;
+    }
+
+
     public Vector2 GetCurrentPos()
     {
         return newBody.transform.position;
@@ -47,17 +54,19 @@ public class Body : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         int type = 0;
-        Destroy(collision.gameObject);
         switch (collision.tag)
         {
             case "food":
                 SnakeControl.Instance.AddBody(SnakeControl.Instance.foodLength);
-                MapManager.Instance.foods.Remove(collision.gameObject);
-                if(SnakeControl.Instance.autoFindFood)
+                if (SceneManager.GetActiveScene().name == "Scene0")
                 {
-                    MapManager.Instance.updatePoints();
-                }
-                type = 2;
+                    MapManager.Instance.foods.Remove(collision.gameObject);
+                    if (SnakeControl.Instance.autoFindFood)
+                    {
+                        MapManager.Instance.updatePoints();
+                    }
+                    type = 2;
+                }                
                 break;
             case "grass":
                 if (!power) SnakeControl.Instance.DeleteBody(SnakeControl.Instance.grasslength);
@@ -96,13 +105,24 @@ public class Body : MonoBehaviour
             case "monster":
                 SnakeControl.Instance.DeleteBody(1);
                 break;
+            case "MoveFood":
+                HorizontalMoveControl.Instance.AddBody(collision.gameObject.GetComponent<Diamond>().randomNum);
+                break;
+            case "diamond":
+                HorizontalMoveControl.Instance.DeleteBody(collision.gameObject.GetComponent<Diamond>().randomNum);
+                break;
+            case "line":
+                GetComponent<SpriteRenderer>().color = collision.gameObject.GetComponent<SpriteRenderer>().color;
+                break;
         }
         if (SceneManager.GetActiveScene().name == "Scene0") 
         {
             int x = (int)collision.transform.position.x + 40, y = (int)collision.transform.position.y + 40;
             MapManager.Instance.Grids[x, y].SetUseFul(true);
             MapManager.Instance.RandomProp(1, MapManager.Instance.propPrefabs[type]);
-        }       
+        }
+        if (SceneManager.GetActiveScene().name != "Scene4")
+            Destroy(collision.gameObject);
     }
 
     private void recoverSpeed()

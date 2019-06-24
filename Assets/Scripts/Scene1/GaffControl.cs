@@ -52,10 +52,10 @@ public class GaffControl : MonoBehaviour
             case 0:
                 direction = Vector3.up;
                 break;
-            case 90.0f:
+            case 90:
                 direction = Vector3.left;
                 break;
-            case 270.0f:
+            case 270:
                 direction = Vector3.right;
                 break;
             case 180:

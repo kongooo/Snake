@@ -21,6 +21,7 @@ public class SnakeControl : MonoBehaviour
     public bool startMove = false;
     Vector2 direction = Vector2.zero;
     private float cameraWidth = 0, cameraHeight = 0;
+    private bool rotate = false;
 
     public int HP;
 
@@ -35,11 +36,7 @@ public class SnakeControl : MonoBehaviour
         //mapScale = MapManager.Instance.mapScale;
         speed = commonSpeed;
     }
-    void Update()
-    {
-        
-    }
-
+    
     private void FixedUpdate()
     {
 
@@ -75,6 +72,7 @@ public class SnakeControl : MonoBehaviour
     void directControl()
     {
         moveDirect = (movePos - snake[0].GetCurrentPos()).normalized;
+        
     }
 
     void PosControl()
@@ -91,10 +89,28 @@ public class SnakeControl : MonoBehaviour
     {
         if (!autoFindFood)
         {
+            
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
             Vector3 mouseScreenPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, pos.z);
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
             Vector3 diff = new Vector2(mouseWorldPos.x, mouseWorldPos.y) - snake[0].pos;
+            Vector2 direct = (snake[0].GetCurrentPos() - snake[1].GetCurrentPos()).normalized;
+            //if (Vector2.Angle(direct, diff) < 170)
+            //{
+            //    if (diff.magnitude > 1.0f)
+            //        direction = diff.normalized;
+            //}
+
+            //if (snake.Count > 1)
+            //{
+            //    Vector2 direct = (snake[0].GetCurrentPos() - snake[1].GetCurrentPos()).normalized;
+            //    if (Vector2.Angle(direct, direction) > 120)
+            //    {
+            //        float angle = Vector2.Angle(direct, Vector2.up);
+            //        Debug.Log(angle);
+            //        direction = new Vector2(-Mathf.Sin(angle + 10), Mathf.Cos(angle + 10));
+            //    }
+            //}
             if (diff.magnitude > 1.0f)
                 direction = diff.normalized;
             SnakeMove(direction);
@@ -113,8 +129,8 @@ public class SnakeControl : MonoBehaviour
     }
 
     void SnakeMove(Vector2 direction)
-    {        
-        snake[0].pos = direction * speed * Time.deltaTime + snake[0].GetCurrentPos();;
+    {
+        snake[0].pos = direction * speed * Time.deltaTime + snake[0].GetCurrentPos(); ;
         snake[0].SetRotation(new Vector3(direction.x, direction.y, 0));
         snake[0].move();
         for (int i = 1; i < snake.Count; i++) 
@@ -125,6 +141,8 @@ public class SnakeControl : MonoBehaviour
             snake[i].move();
         }        
     }
+
+    
 
     void cameraControl()
     {
@@ -150,6 +168,12 @@ public class SnakeControl : MonoBehaviour
             //Vector2 newPos = 2 * snake[snake.Count - 1].pos - snake[snake.Count - 2].pos;
             snake.Add(new Body(gameObject, bodyPrefab, snake[snake.Count-1].pos));
             snake[snake.Count - 1].ShowBody();
+            if((snake[snake.Count-1].GetCurrentPos()-snake[snake.Count-2].GetCurrentPos()).magnitude>space)
+            {
+                Vector2 direct = (snake[snake.Count - 1].GetCurrentPos() - snake[snake.Count - 2].GetCurrentPos()).normalized * space;
+                snake[snake.Count - 1].SetPos(snake[snake.Count - 2].GetCurrentPos() + direct);
+            }
+                
         }      
     }
 

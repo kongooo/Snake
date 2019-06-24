@@ -6,24 +6,20 @@ using TMPro;
 public class Diamond : MonoBehaviour
 {
     public TextMeshProUGUI Text;
-    [HideInInspector]public int min, max;
+    [HideInInspector] public int min, max, randomNum;
     [HideInInspector] public float speed;
 
-    private void Awake()
-    {
-        RandomNum();
-    }
-
-
+   
     void Update()
     {
         Move();
         if (transform.position.x < -12) Destroy(gameObject);
     }
 
-    public void RandomNum()
+    public void RandomNum(int num)
     {
-        Text.text = Random.Range(min, max + 1).ToString();
+        randomNum = num;
+        Text.text = randomNum.ToString();
     }
 
     void Move()
@@ -33,7 +29,15 @@ public class Diamond : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "food")
+        if (collision.tag == "MoveFood")
             Destroy(collision.gameObject);
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "MoveFood")
+            Destroy(collision.gameObject);
+    }
+
+    
 }
