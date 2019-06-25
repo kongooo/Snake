@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1ce323ffb8954244951d682a20947cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newBody: {fileID: 0}
   pos: {x: 0, y: 0}
 --- !u!50 &4319943428115897056
 Rigidbody2D:

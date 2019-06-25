@@ -22,8 +22,7 @@ public class SnakeControl : MonoBehaviour
     Vector2 direction = Vector2.zero;
     private float cameraWidth = 0, cameraHeight = 0;
     private bool rotate = false;
-
-    public int HP;
+    public bool death = false;
 
     void Awake()
     {
@@ -34,7 +33,7 @@ public class SnakeControl : MonoBehaviour
     private void Start()
     {
         //mapScale = MapManager.Instance.mapScale;
-        speed = commonSpeed;
+        //speed = commonSpeed;
     }
     
     private void FixedUpdate()
@@ -67,6 +66,7 @@ public class SnakeControl : MonoBehaviour
             snake.Add(new Body(gameObject, bodyPrefab, pos));
             snake[i].ShowBody();
         }
+        speed = commonSpeed;
     }
 
     void directControl()
@@ -133,13 +133,14 @@ public class SnakeControl : MonoBehaviour
         snake[0].pos = direction * speed * Time.deltaTime + snake[0].GetCurrentPos(); ;
         snake[0].SetRotation(new Vector3(direction.x, direction.y, 0));
         snake[0].move();
-        for (int i = 1; i < snake.Count; i++) 
+        for (int i = 1; i < snake.Count; i++)
         {
             Vector2 direct = (snake[i].pos - snake[i - 1].pos).normalized;
             Vector2 basePos = tailDocking ? snake[i - 1].pos : snake[i - 1].GetCurrentPos();
             snake[i].pos = basePos + direct * space;
             snake[i].move();
-        }        
+        }
+       
     }
 
     
@@ -172,9 +173,9 @@ public class SnakeControl : MonoBehaviour
             {
                 Vector2 direct = (snake[snake.Count - 1].GetCurrentPos() - snake[snake.Count - 2].GetCurrentPos()).normalized * space;
                 snake[snake.Count - 1].SetPos(snake[snake.Count - 2].GetCurrentPos() + direct);
-            }
-                
-        }      
+            }                
+        }
+        UpdateScene1Score();
     }
 
     public void DeleteBody(int count)
@@ -185,5 +186,12 @@ public class SnakeControl : MonoBehaviour
             snake[lastIndex].DestroyBody();
             snake.RemoveAt(lastIndex--);
         }
+        UpdateScene1Score();
+    }
+
+    void UpdateScene1Score()
+    {
+        if (SceneManager.GetActiveScene().name == "Scene0")
+            Scene1Controller.Instance.UpdateLength(snake.Count);
     }
 }

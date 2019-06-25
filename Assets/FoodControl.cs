@@ -8,6 +8,7 @@ public class FoodControl : MonoBehaviour
     public float intervalTime, speed;
     public int min, max, maxCount;
     private float timing = 0;
+    private List<int> avoidRepeat = new List<int>();
 
     private void Awake()
     {
@@ -29,14 +30,17 @@ public class FoodControl : MonoBehaviour
     {
         int count = Random.Range(0, maxCount);
         int y = 0;
+        avoidRepeat.Clear();
         for (int i = 0; i < count; i++) 
         {
-            y = Random.Range(-4, 5);
+        repeat: y = Random.Range(-4, 5);
+            if (avoidRepeat.Contains(y)) goto repeat;
             GameObject temp = Instantiate(food, new Vector3(15, y, 0), Quaternion.identity);
             temp.GetComponent<Diamond>().min = this.min;
             temp.GetComponent<Diamond>().max = this.max;
             temp.GetComponent<Diamond>().speed = this.speed;
             temp.GetComponent<Diamond>().RandomNum(Random.Range(min,max));
+            avoidRepeat.Add(y);
         }
     }
 }

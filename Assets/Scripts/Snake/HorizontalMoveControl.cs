@@ -61,11 +61,12 @@ public class HorizontalMoveControl : MonoBehaviour
     public void DeleteBody(int count)
     {
         int length = snake.Count;
-        for (int i = 0; i < count; i++) 
+        for (int i = length - 1; i > length - 1 - count; i--) 
         {
-            snake[length - 1 - i].DestroyBody();
-            snake.RemoveAt(length - 1 - i);
+            snake[i].DestroyBody();
+            snake.RemoveAt(i);
         }
         if (snake.Count == 0) death = true;
     }
+    
 }
