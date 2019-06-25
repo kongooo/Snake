@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SnakeMove4 : MonoBehaviour
 {
+    private static SnakeMove4 _instance;
+    public static SnakeMove4 Instance { get { return _instance; } }
     public GameObject bodyPrefab;
     [HideInInspector] public List<Body> snake = new List<Body>();
     public float space, length, Yspeed, Xspeed, YmaxSpeed;
@@ -11,6 +13,7 @@ public class SnakeMove4 : MonoBehaviour
 
     private void Awake()
     {
+        _instance = this;
         SnakeInit();
     }
     private void FixedUpdate()
