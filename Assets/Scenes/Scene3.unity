@@ -151,6 +151,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyPrefab: {fileID: 4297138117789259192, guid: 76d415731686b8d4ab5511f4e1c6a563,
     type: 3}
+  headPrefab: {fileID: 1756319003162467634, guid: 642ab3da53a687141bc1e128949fbdec,
+    type: 3}
   snake: []
   space: 0.2
   length: 10

@@ -35,15 +35,15 @@ public class SnakeControl : MonoBehaviour
         //mapScale = MapManager.Instance.mapScale;
         //speed = commonSpeed;
     }
-    
+
     private void FixedUpdate()
     {
 
-        if(startMove)
+        if (startMove)
         {
             SnakeMoveControl(autoFindFood);
             cameraControl();
-        }       
+        }
     }
 
     void InitCameraSize()
@@ -60,7 +60,7 @@ public class SnakeControl : MonoBehaviour
         Vector2 pos = transform.position;
         snake.Add(new Body(gameObject, headPrefab, pos));
         snake[0].ShowBody();
-        for (int i = 1; i < length; i++) 
+        for (int i = 1; i < length; i++)
         {
             pos -= new Vector2(0.0f, space + 0.1f);
             snake.Add(new Body(gameObject, bodyPrefab, pos));
@@ -72,12 +72,12 @@ public class SnakeControl : MonoBehaviour
     void directControl()
     {
         moveDirect = (movePos - snake[0].GetCurrentPos()).normalized;
-        
+
     }
 
     void PosControl()
     {
-        if (posIndex >= 0 && (snake[0].GetCurrentPos() - MapManager.Instance.points[posIndex]).magnitude < 0.1f) 
+        if (posIndex >= 0 && (snake[0].GetCurrentPos() - MapManager.Instance.points[posIndex]).magnitude < 0.1f)
         {
             DrawLine.Instance.Draw();
             if (posIndex > 0) posIndex--;
@@ -89,7 +89,7 @@ public class SnakeControl : MonoBehaviour
     {
         if (!autoFindFood)
         {
-            
+
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
             Vector3 mouseScreenPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, pos.z);
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
@@ -122,10 +122,10 @@ public class SnakeControl : MonoBehaviour
             direction = moveDirect;
             if ((snake[0].GetCurrentPos() - MapManager.Instance.points[0]).magnitude > 0.1f)
                 SnakeMove(direction);
-            if (DrawLine.Instance.linePos.Count > 0) 
+            if (DrawLine.Instance.linePos.Count > 0)
                 DrawLine.Instance.lineRenderer.SetPosition(DrawLine.Instance.linePos.Count - 1, snake[0].GetCurrentVector3Pos());
         }
-        
+
     }
 
     void SnakeMove(Vector2 direction)
@@ -140,17 +140,17 @@ public class SnakeControl : MonoBehaviour
             snake[i].pos = basePos + direct * space;
             snake[i].move();
         }
-       
+
     }
 
-    
+
 
     void cameraControl()
     {
         float cameraX, cameraY;
         Vector2 cameraCurrentPos = new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.y);
-        
-        cameraX = Mathf.Abs(snake[0].GetCurrentPos().x) < 40 - cameraWidth ? Mathf.Abs(snake[0].GetCurrentPos().x) : 40- cameraWidth;
+
+        cameraX = Mathf.Abs(snake[0].GetCurrentPos().x) < 40 - cameraWidth ? Mathf.Abs(snake[0].GetCurrentPos().x) : 40 - cameraWidth;
         cameraY = Mathf.Abs(snake[0].GetCurrentPos().y) < 40 - cameraHeight ? Mathf.Abs(snake[0].GetCurrentPos().y) : 40 - cameraHeight;
         if (snake[0].pos.x < 0) cameraX = -cameraX;
         if (snake[0].pos.y < 0) cameraY = -cameraY;
@@ -164,16 +164,16 @@ public class SnakeControl : MonoBehaviour
 
     public void AddBody(int count)
     {
-        for (int i = 0; i < count; i++) 
+        for (int i = 0; i < count; i++)
         {
             //Vector2 newPos = 2 * snake[snake.Count - 1].pos - snake[snake.Count - 2].pos;
-            snake.Add(new Body(gameObject, bodyPrefab, snake[snake.Count-1].pos));
+            snake.Add(new Body(gameObject, bodyPrefab, snake[snake.Count - 1].pos));
             snake[snake.Count - 1].ShowBody();
-            if((snake[snake.Count-1].GetCurrentPos()-snake[snake.Count-2].GetCurrentPos()).magnitude>space)
+            if ((snake[snake.Count - 1].GetCurrentPos() - snake[snake.Count - 2].GetCurrentPos()).magnitude > space)
             {
                 Vector2 direct = (snake[snake.Count - 1].GetCurrentPos() - snake[snake.Count - 2].GetCurrentPos()).normalized * space;
                 snake[snake.Count - 1].SetPos(snake[snake.Count - 2].GetCurrentPos() + direct);
-            }                
+            }
         }
         UpdateScene1Score();
     }
@@ -181,7 +181,7 @@ public class SnakeControl : MonoBehaviour
     public void DeleteBody(int count)
     {
         int lastIndex = snake.Count - 1;
-        for (int i = 0; i < count; i++) 
+        for (int i = 0; i < count; i++)
         {
             snake[lastIndex].DestroyBody();
             snake.RemoveAt(lastIndex--);

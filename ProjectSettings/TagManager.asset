@@ -21,6 +21,7 @@ TagManager:
   - MoveFood
   - line
   - barrier
+  - Success
   layers:
   - Default
   - TransparentFX

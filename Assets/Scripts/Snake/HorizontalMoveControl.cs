@@ -6,7 +6,7 @@ public class HorizontalMoveControl : MonoBehaviour
 {
     private static HorizontalMoveControl _instance;
     public static HorizontalMoveControl Instance { get { return _instance; } }
-    public GameObject bodyPrefab;
+    public GameObject bodyPrefab, headPrefab;
     [HideInInspector] public List<Body> snake = new List<Body>();
     public float space, length, speed;
     public bool death = false;
@@ -25,7 +25,7 @@ public class HorizontalMoveControl : MonoBehaviour
     void SnakeInit()
     {
         Vector2 pos = transform.position;
-        snake.Add(new Body(gameObject, bodyPrefab, pos));
+        snake.Add(new Body(gameObject, headPrefab, pos));
         snake[0].ShowBody();
         for (int i = 1; i < length; i++)
         {
@@ -39,6 +39,7 @@ public class HorizontalMoveControl : MonoBehaviour
     {
         Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, pos.z));
+        snake[0].SetRotation((mouseWorldPos - snake[0].GetCurrentVector3Pos()).normalized);
         snake[0].newBody.GetComponent<Rigidbody2D>().MovePosition(new Vector2(snake[0].GetCurrentPos().x, Mathf.Lerp(snake[0].GetCurrentPos().y, mouseWorldPos.y, Time.deltaTime * speed)));
         for (int i = 1; i < snake.Count; i++)
         {
@@ -61,12 +62,11 @@ public class HorizontalMoveControl : MonoBehaviour
     public void DeleteBody(int count)
     {
         int length = snake.Count;
-        for (int i = length - 1; i > length - 1 - count; i--) 
+        for (int i = 0; i < count; i++) 
         {
-            snake[i].DestroyBody();
-            snake.RemoveAt(i);
+            snake[length - 1 - i].DestroyBody();
+            snake.RemoveAt(length - 1 - i);
         }
         if (snake.Count == 0) death = true;
     }
-    
 }

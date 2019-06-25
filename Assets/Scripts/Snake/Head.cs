@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class Head : MonoBehaviour
 {
     private bool power = false, doubleScore = false;
+    public GameObject sheildPrefab;
+    private GameObject tempSheild;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         int type = 0;
@@ -26,9 +29,9 @@ public class Head : MonoBehaviour
                         Scene1Controller.Instance.ChangeScore(doubleScore ? 20 : 10);
                         doubleScore = true;
                         Invoke("recoverDouble", 10);
-                    }
-                    type = 2;
+                    }                    
                 }
+                type = 2;
                 Destroy(collision.gameObject);
                 break;
             case "grass":
@@ -64,6 +67,8 @@ public class Head : MonoBehaviour
                 break;
             case "sheild":
                 power = true;
+                tempSheild = GameObject.Instantiate(sheildPrefab, gameObject.transform.position, Quaternion.identity);
+                tempSheild.transform.SetParent(gameObject.transform, true);
                 Invoke("recoverPower", SnakeControl.Instance.powerTime);
                 type = 5;
                 Destroy(collision.gameObject);
@@ -83,7 +88,11 @@ public class Head : MonoBehaviour
             case "diamond":
                 HorizontalMoveControl.Instance.DeleteBody(collision.gameObject.GetComponent<Diamond>().randomNum);
                 Destroy(collision.gameObject);
-                break;            
+                break;
+            case "MoveFood":
+                HorizontalMoveControl.Instance.AddBody(collision.gameObject.GetComponent<Diamond>().randomNum);
+                Destroy(collision.gameObject);
+                break;
         }
         if (SceneManager.GetActiveScene().name == "Scene0")
         {
@@ -109,6 +118,7 @@ public class Head : MonoBehaviour
     private void recoverPower()
     {
         power = false;
+        Destroy(tempSheild);
     }
 
     private void recoverAuto()

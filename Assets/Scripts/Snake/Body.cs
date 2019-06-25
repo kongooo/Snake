@@ -52,17 +52,13 @@ public class Body : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        int type = 0;
         switch (collision.tag)
-        {            
+        {
             case "gaff":
                 SnakeControl.Instance.DeleteBody(1);
                 break;
             case "monster":
                 SnakeControl.Instance.DeleteBody(1);
-                break;
-            case "MoveFood":
-                HorizontalMoveControl.Instance.AddBody(collision.gameObject.GetComponent<Diamond>().randomNum);
                 break;
             case "line":
                 GetComponent<SpriteRenderer>().color = collision.gameObject.GetComponent<SpriteRenderer>().color;
@@ -72,14 +68,9 @@ public class Body : MonoBehaviour
                     SnakeMove4.Instance.death = true;
                 break;
         }
-        if (SceneManager.GetActiveScene().name == "Scene0") 
-        {
-            int x = (int)collision.transform.position.x + 40, y = (int)collision.transform.position.y + 40;
-            MapManager.Instance.Grids[x, y].SetUseFul(true);
-            MapManager.Instance.RandomProp(1, MapManager.Instance.propPrefabs[type]);
-        }
     }
 
-    
+
 }
+
 
