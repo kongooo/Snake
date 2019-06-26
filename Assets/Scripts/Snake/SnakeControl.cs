@@ -39,7 +39,7 @@ public class SnakeControl : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if (startMove)
+        if (startMove && !death)
         {
             SnakeMoveControl(autoFindFood);
             cameraControl();
@@ -52,12 +52,13 @@ public class SnakeControl : MonoBehaviour
         var rightUp = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 0));
         cameraWidth = (rightUp.x - leftDown.x) / 2;
         cameraHeight = (rightUp.y - leftDown.y) / 2;
-        Debug.Log(cameraWidth + " " + cameraHeight);
     }
 
     void SnakeInit()
     {
         Vector2 pos = transform.position;
+        //if (SceneManager.GetActiveScene().name != "Scene0")
+        //    pos = new Vector2(-16, 8);
         snake.Add(new Body(gameObject, headPrefab, pos));
         snake[0].ShowBody();
         for (int i = 1; i < length; i++)
@@ -93,8 +94,14 @@ public class SnakeControl : MonoBehaviour
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
             Vector3 mouseScreenPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, pos.z);
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
-            Vector3 diff = new Vector2(mouseWorldPos.x, mouseWorldPos.y) - snake[0].pos;
-            Vector2 direct = (snake[0].GetCurrentPos() - snake[1].GetCurrentPos()).normalized;
+            Vector3 diff;
+            if (snake.Count > 0) 
+            {
+                diff = new Vector2(mouseWorldPos.x, mouseWorldPos.y) - snake[0].pos;
+                if (diff.magnitude > 1.0f)
+                    direction = diff.normalized;
+                SnakeMove(direction);
+            }
             //if (Vector2.Angle(direct, diff) < 170)
             //{
             //    if (diff.magnitude > 1.0f)
@@ -110,10 +117,7 @@ public class SnakeControl : MonoBehaviour
             //        Debug.Log(angle);
             //        direction = new Vector2(-Mathf.Sin(angle + 10), Mathf.Cos(angle + 10));
             //    }
-            //}
-            if (diff.magnitude > 1.0f)
-                direction = diff.normalized;
-            SnakeMove(direction);
+            //}            
         }
         else
         {
@@ -147,11 +151,13 @@ public class SnakeControl : MonoBehaviour
 
     void cameraControl()
     {
-        float cameraX, cameraY;
+        float cameraX, cameraY, mapX, mapY;
+        mapX = SceneManager.GetActiveScene().name == "Scene0" ? 40 : 17.5f;
+        mapY = SceneManager.GetActiveScene().name == "Scene0" ? 40 : 10f;
         Vector2 cameraCurrentPos = new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.y);
 
-        cameraX = Mathf.Abs(snake[0].GetCurrentPos().x) < 40 - cameraWidth ? Mathf.Abs(snake[0].GetCurrentPos().x) : 40 - cameraWidth;
-        cameraY = Mathf.Abs(snake[0].GetCurrentPos().y) < 40 - cameraHeight ? Mathf.Abs(snake[0].GetCurrentPos().y) : 40 - cameraHeight;
+        cameraX = Mathf.Abs(snake[0].GetCurrentPos().x) < mapX - cameraWidth ? Mathf.Abs(snake[0].GetCurrentPos().x) : mapX - cameraWidth;
+        cameraY = Mathf.Abs(snake[0].GetCurrentPos().y) < mapY - cameraHeight ? Mathf.Abs(snake[0].GetCurrentPos().y) : mapY - cameraHeight;
         if (snake[0].pos.x < 0) cameraX = -cameraX;
         if (snake[0].pos.y < 0) cameraY = -cameraY;
 
@@ -175,23 +181,39 @@ public class SnakeControl : MonoBehaviour
                 snake[snake.Count - 1].SetPos(snake[snake.Count - 2].GetCurrentPos() + direct);
             }
         }
-        UpdateScene1Score();
+        UpdateScene1Length();
+        UpdateScene2Length();
     }
 
     public void DeleteBody(int count)
     {
+        if (!death && snake.Count < 2)
+        {
+            death = true;
+            Scene2Controller.Instance.AfterDeath();
+            Destroy(snake[0].newBody);
+            return;
+        }
         int lastIndex = snake.Count - 1;
         for (int i = 0; i < count; i++)
         {
             snake[lastIndex].DestroyBody();
             snake.RemoveAt(lastIndex--);
         }
-        UpdateScene1Score();
+        UpdateScene1Length();
+        UpdateScene2Length();
     }
 
-    void UpdateScene1Score()
+    void UpdateScene1Length()
     {
         if (SceneManager.GetActiveScene().name == "Scene0")
             Scene1Controller.Instance.UpdateLength(snake.Count);
+    }
+
+    void UpdateScene2Length()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName == "Scene2-1" || sceneName == "Scene2-2" || sceneName == "Scene2-3" || sceneName == "Scene2-4")
+            Scene2Controller.Instance.UpdateLength(snake.Count);
     }
 }

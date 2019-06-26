@@ -7,6 +7,7 @@ public class Head : MonoBehaviour
 {
     private bool power = false, doubleScore = false;
     public GameObject sheildPrefab;
+    public Sprite snakeDizzy, snakeNormal;
     private GameObject tempSheild;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -15,9 +16,17 @@ public class Head : MonoBehaviour
         switch (collision.tag)
         {
             case "food":
-                SnakeControl.Instance.AddBody(SnakeControl.Instance.foodLength);
+                
+                string sceneName = SceneManager.GetActiveScene().name;
+                if (sceneName == "Scene2-1" || sceneName == "Scene2-2" || sceneName == "Scene2-3" || sceneName == "Scene2-4")
+                {
+                    Scene2Controller.Instance.ChangeScore(100);
+                    SnakeControl.Instance.AddBody(1);
+                }
+                    
                 if (SceneManager.GetActiveScene().name == "Scene0")
                 {
+                    SnakeControl.Instance.AddBody(SnakeControl.Instance.foodLength);
                     MapManager.Instance.foods.Remove(collision.gameObject);
                     if (SnakeControl.Instance.autoFindFood)
                     {
@@ -29,7 +38,7 @@ public class Head : MonoBehaviour
                         Scene1Controller.Instance.ChangeScore(doubleScore ? 20 : 10);
                         doubleScore = true;
                         Invoke("recoverDouble", 10);
-                    }                    
+                    }
                 }
                 type = 2;
                 Destroy(collision.gameObject);
@@ -77,6 +86,7 @@ public class Head : MonoBehaviour
                 MapManager.Instance.updatePoints();
                 SnakeControl.Instance.autoFindFood = true;
                 Scene1Controller.Instance.ChangeScore(10);
+                gameObject.GetComponent<SpriteRenderer>().sprite = snakeDizzy;
                 Invoke("recoverAuto", SnakeControl.Instance.autoTime);
                 type = 6;
                 Destroy(collision.gameObject);
@@ -92,6 +102,10 @@ public class Head : MonoBehaviour
             case "MoveFood":
                 HorizontalMoveControl.Instance.AddBody(collision.gameObject.GetComponent<Diamond>().randomNum);
                 Destroy(collision.gameObject);
+                break;
+            case "Success":
+                SnakeControl.Instance.death = true;
+                Scene2Controller.Instance.AfterSuccess();
                 break;
         }
         if (SceneManager.GetActiveScene().name == "Scene0")
@@ -125,6 +139,7 @@ public class Head : MonoBehaviour
     {
         SnakeControl.Instance.autoFindFood = false;
         DrawLine.Instance.lineRenderer.positionCount = 0;
+        gameObject.GetComponent<SpriteRenderer>().sprite = snakeNormal;
     }
 
     private void recoverDouble()

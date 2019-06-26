@@ -17,7 +17,7 @@ public class Body : MonoBehaviour
     public void ShowBody()
     {
         newBody = GameObject.Instantiate(body, pos, Quaternion.identity);
-        newBody.transform.SetParent(parent.transform, false);
+        newBody.transform.SetParent(parent.transform, true);
     }
 
     public void DestroyBody()
@@ -55,7 +55,9 @@ public class Body : MonoBehaviour
         switch (collision.tag)
         {
             case "gaff":
+                Debug.Log("gaff");
                 SnakeControl.Instance.DeleteBody(1);
+                Scene2Controller.Instance.ChangeScore(-50);
                 break;
             case "monster":
                 SnakeControl.Instance.DeleteBody(1);

@@ -148,3 +148,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sheildPrefab: {fileID: 7306394673851269606, guid: c38253d53eb84ed449b6a0bebf9d9813,
     type: 3}
+  snakeDizzy: {fileID: 21300000, guid: f4a90d07f09063246926953c05f7500f, type: 3}
+  snakeNormal: {fileID: 21300000, guid: 740e9482f55bc4b40ad55a9bf4bdd5f4, type: 3}

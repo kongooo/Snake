@@ -25,8 +25,6 @@ public class MoveGaffControl : MonoBehaviour
         timing += Time.deltaTime;
         float num2 = timing;
         int num = Mathf.FloorToInt(timing * 10);
-        Debug.Log(num);
-        Debug.Log(timing);
         if (num % orderPerSecond == 0&&num!=record)
         {
             moveControl();
