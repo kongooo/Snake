@@ -190,7 +190,8 @@ public class SnakeControl : MonoBehaviour
         if (!death && snake.Count < 2)
         {
             death = true;
-            Scene2Controller.Instance.AfterDeath();
+            if (SceneManager.GetActiveScene().name != "scene0")
+                Scene2Controller.Instance.AfterDeath();
             Destroy(snake[0].newBody);
             return;
         }
@@ -212,8 +213,7 @@ public class SnakeControl : MonoBehaviour
 
     void UpdateScene2Length()
     {
-        string sceneName = SceneManager.GetActiveScene().name;
-        if (sceneName == "Scene2-1" || sceneName == "Scene2-2" || sceneName == "Scene2-3" || sceneName == "Scene2-4")
+        if (SceneManager.GetActiveScene().name != "Scene0") 
             Scene2Controller.Instance.UpdateLength(snake.Count);
     }
 }

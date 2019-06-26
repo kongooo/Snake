@@ -5,15 +5,20 @@ using UnityEngine;
 public class FoodControl : MonoBehaviour
 {
     public GameObject food;
-    public float intervalTime, speed;
+    public float intervalTime;
     public int min, max, maxCount;
-    private float timing = 0;
+    private float timing = 0, speed;
+    private List<int> avoidSame = new List<int>();
 
     private void Awake()
     {
         timing = intervalTime;
     }
 
+    private void Start()
+    {
+        this.speed = HorizontalMoveControl.Instance.speed;
+    }
 
     void Update()
     {
@@ -29,9 +34,12 @@ public class FoodControl : MonoBehaviour
     {
         int count = Random.Range(0, maxCount);
         int y = 0;
+        avoidSame.Clear();
         for (int i = 0; i < count; i++) 
         {
-            y = Random.Range(-4, 5);
+        repeat: y = Random.Range(-4, 5);
+            if (avoidSame.Contains(y)) goto repeat;
+            avoidSame.Add(y);
             GameObject temp = Instantiate(food, new Vector3(15, y, 0), Quaternion.identity);
             temp.GetComponent<Diamond>().min = this.min;
             temp.GetComponent<Diamond>().max = this.max;

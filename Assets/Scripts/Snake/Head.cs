@@ -16,15 +16,12 @@ public class Head : MonoBehaviour
         switch (collision.tag)
         {
             case "food":
-                
-                string sceneName = SceneManager.GetActiveScene().name;
-                if (sceneName == "Scene2-1" || sceneName == "Scene2-2" || sceneName == "Scene2-3" || sceneName == "Scene2-4")
+                if (SceneManager.GetActiveScene().name != "Scene0") 
                 {
                     Scene2Controller.Instance.ChangeScore(100);
                     SnakeControl.Instance.AddBody(1);
                 }
-                    
-                if (SceneManager.GetActiveScene().name == "Scene0")
+                else
                 {
                     SnakeControl.Instance.AddBody(SnakeControl.Instance.foodLength);
                     MapManager.Instance.foods.Remove(collision.gameObject);
@@ -97,10 +94,12 @@ public class Head : MonoBehaviour
                 break;
             case "diamond":
                 HorizontalMoveControl.Instance.DeleteBody(collision.gameObject.GetComponent<Diamond>().randomNum);
+                Scene3Controller.Instance.ChangeScore(collision.gameObject.GetComponent<Diamond>().randomNum * 5);
                 Destroy(collision.gameObject);
                 break;
             case "MoveFood":
                 HorizontalMoveControl.Instance.AddBody(collision.gameObject.GetComponent<Diamond>().randomNum);
+                Scene3Controller.Instance.ChangeScore(collision.gameObject.GetComponent<Diamond>().randomNum * 10);
                 Destroy(collision.gameObject);
                 break;
             case "Success":

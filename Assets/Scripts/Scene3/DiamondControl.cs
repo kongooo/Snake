@@ -5,9 +5,15 @@ using UnityEngine;
 public class DiamondControl : MonoBehaviour
 {
     public GameObject[] diamonds;
-    public float speed, intervalTime;
+    public float intervalTime;
+    private float speed;
     public int min, max;
     private float timing = 0;
+
+    private void Start()
+    {
+        this.speed = HorizontalMoveControl.Instance.speed;
+    }
 
 
     void Update()

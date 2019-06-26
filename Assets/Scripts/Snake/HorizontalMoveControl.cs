@@ -18,7 +18,8 @@ public class HorizontalMoveControl : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        HorizontalMove();
+        if (!death)
+            HorizontalMove();
     }
 
    
@@ -50,7 +51,7 @@ public class HorizontalMoveControl : MonoBehaviour
     public void AddBody(int count)
     {
         int last = snake.Count - 1;
-        Vector2 pos = snake[last].GetCurrentPos() + new Vector2(2, 0);
+        Vector2 pos = snake[last].GetCurrentPos();
         for (int i = last; i < last + count; i++)
         {
             pos -= new Vector2(space, 0);
@@ -61,6 +62,14 @@ public class HorizontalMoveControl : MonoBehaviour
 
     public void DeleteBody(int count)
     {
+        if (count >= snake.Count && !death) 
+        {
+            death = true;
+            Scene3Controller.Instance.AfterDeath();
+            for (int i = 0; i < snake.Count; i++)
+                Destroy(snake[i].newBody);
+            return;
+        }
         int length = snake.Count;
         for (int i = 0; i < count; i++) 
         {

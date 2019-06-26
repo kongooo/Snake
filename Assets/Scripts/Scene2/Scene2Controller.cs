@@ -28,11 +28,6 @@ public class Scene2Controller : MonoBehaviour
         UpdateScore(0);
     }
 
-    private void Update()
-    {
-        
-    }
-
     void UpdateLevel()
     {
         int level = 0;
