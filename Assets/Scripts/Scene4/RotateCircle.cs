@@ -25,7 +25,7 @@ public class RotateCircle : MonoBehaviour
     {
         for (int i = 0; i < Circles.Length; i++)
         {
-            Circles[i].transform.position = transform.position + Radius * new Vector3(Mathf.Cos(angles[i]), Mathf.Sin(angles[i]), Circles[i].transform.position.z);
+            Circles[i].transform.position = transform.position + Radius * new Vector3(Mathf.Cos(angles[i]), Mathf.Sin(angles[i]),0);
             angles[i] += Time.deltaTime * Speed;
         }
 

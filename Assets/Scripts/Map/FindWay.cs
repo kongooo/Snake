@@ -10,17 +10,11 @@ public class FindWay : MonoBehaviour
     private List<Grid> openList = new List<Grid>();
     private List<Grid> closeList = new List<Grid>();
 
-    public GameObject temp;
-
     private void Awake()
     {
         _instance = this;
     }
-    private void Start()
-    {
-        
-    }
-
+ 
     public List<Vector2> GetWay(Grid sGrid, Grid eGrid)
     {
         Grid grid = sGrid;

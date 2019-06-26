@@ -21,7 +21,7 @@ public class WallsControl : MonoBehaviour
     void Update()
     {
         timing += Time.deltaTime;
-        if (timing >= intervalTime)
+        if (!HorizontalMoveControl.Instance.death && timing >= intervalTime)
         {
             init();
             timing = 0;

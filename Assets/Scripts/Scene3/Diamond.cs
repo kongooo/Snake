@@ -12,7 +12,8 @@ public class Diamond : MonoBehaviour
    
     void Update()
     {
-        Move();
+        if (!HorizontalMoveControl.Instance.death)
+            Move();
         if (transform.position.x < -12) Destroy(gameObject);
     }
 

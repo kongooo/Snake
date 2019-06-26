@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Scene1Controller : MonoBehaviour
 {
     private static Scene1Controller _instance;
     public static Scene1Controller Instance { get { return _instance; } }
 
-    public TextMeshProUGUI Length, Score, Speed;
+    public TextMeshProUGUI Length, Score, Speed, ScoreText;
+
+    public Canvas EndCanvas, UICanvas;
+
+    private bool test = false;
 
 
     private void Awake()
@@ -21,11 +26,28 @@ public class Scene1Controller : MonoBehaviour
         UpdateLength(SnakeControl.Instance.length);
         UpdateSpeed((int)SnakeControl.Instance.speed);
         UpdateScore(50);
+        EndCanvas.planeDistance = 0;
     }
 
     void Update()
     {
-        if (GetScore() < 0) SnakeControl.Instance.death = true;
+        if (!test && (SnakeControl.Instance.death || GetScore() < 0))
+        {
+            test = true;
+            GameOver();
+        }
+    }
+
+    public void GameOver()
+    {
+        ScoreText.text = Score.text;
+        UICanvas.gameObject.SetActive(false);
+        EndCanvas.planeDistance = 1;
+    }
+
+    public void GameAgain()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void UpdateLength(int length)

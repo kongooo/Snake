@@ -22,6 +22,8 @@ TagManager:
   - line
   - barrier
   - Success
+  - Block
+  - tail
   layers:
   - Default
   - TransparentFX

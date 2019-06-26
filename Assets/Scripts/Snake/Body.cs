@@ -66,8 +66,12 @@ public class Body : MonoBehaviour
                 GetComponent<SpriteRenderer>().color = collision.gameObject.GetComponent<SpriteRenderer>().color;
                 break;
             case "barrier":
-                if (GetComponent<SpriteRenderer>().color != collision.gameObject.GetComponent<SpriteRenderer>().color)
+                if (!SnakeMove4.Instance.death && GetComponent<SpriteRenderer>().color != collision.gameObject.GetComponent<SpriteRenderer>().color)
+                {
                     SnakeMove4.Instance.death = true;
+                    Scene4Controller.Instance.GameOver();
+                }
+                    
                 break;
         }
     }

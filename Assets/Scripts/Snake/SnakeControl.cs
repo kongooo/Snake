@@ -12,7 +12,7 @@ public class SnakeControl : MonoBehaviour
     [HideInInspector] public List<Body> snake = new List<Body>();
 
     public int length, foodLength, grasslength;
-    public float space, energySpeed, speedUpTime, commonSpeed, powerTime, autoTime;
+    public float space, energySpeed, speedUpTime, commonSpeed, powerTime, autoTime, mouseSensibility;
     public bool tailDocking, autoFindFood = false;
     [HideInInspector] public float speed;
     private Vector2 moveDirect = Vector2.zero;
@@ -29,11 +29,6 @@ public class SnakeControl : MonoBehaviour
         _instance = this;
         InitCameraSize();
         SnakeInit();
-    }
-    private void Start()
-    {
-        //mapScale = MapManager.Instance.mapScale;
-        //speed = commonSpeed;
     }
 
     private void FixedUpdate()
@@ -57,8 +52,8 @@ public class SnakeControl : MonoBehaviour
     void SnakeInit()
     {
         Vector2 pos = transform.position;
-        //if (SceneManager.GetActiveScene().name != "Scene0")
-        //    pos = new Vector2(-16, 8);
+        if (SceneManager.GetActiveScene().name != "Scene0")
+            pos = new Vector2(-16, 8);
         snake.Add(new Body(gameObject, headPrefab, pos));
         snake[0].ShowBody();
         for (int i = 1; i < length; i++)
@@ -98,26 +93,10 @@ public class SnakeControl : MonoBehaviour
             if (snake.Count > 0) 
             {
                 diff = new Vector2(mouseWorldPos.x, mouseWorldPos.y) - snake[0].pos;
-                if (diff.magnitude > 1.0f)
+                if (diff.magnitude > mouseSensibility)
                     direction = diff.normalized;
                 SnakeMove(direction);
-            }
-            //if (Vector2.Angle(direct, diff) < 170)
-            //{
-            //    if (diff.magnitude > 1.0f)
-            //        direction = diff.normalized;
-            //}
-
-            //if (snake.Count > 1)
-            //{
-            //    Vector2 direct = (snake[0].GetCurrentPos() - snake[1].GetCurrentPos()).normalized;
-            //    if (Vector2.Angle(direct, direction) > 120)
-            //    {
-            //        float angle = Vector2.Angle(direct, Vector2.up);
-            //        Debug.Log(angle);
-            //        direction = new Vector2(-Mathf.Sin(angle + 10), Mathf.Cos(angle + 10));
-            //    }
-            //}            
+            }                
         }
         else
         {
@@ -190,8 +169,10 @@ public class SnakeControl : MonoBehaviour
         if (!death && snake.Count < 2)
         {
             death = true;
-            if (SceneManager.GetActiveScene().name != "scene0")
+            if (SceneManager.GetActiveScene().name != "Scene0")
                 Scene2Controller.Instance.AfterDeath();
+            //else
+            //    Scene1Controller.Instance.GameOver();
             Destroy(snake[0].newBody);
             return;
         }

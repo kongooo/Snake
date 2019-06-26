@@ -8,7 +8,8 @@ public class MovingWalls : MonoBehaviour
 
     void Update()
     {
-        Move();
+        if (!HorizontalMoveControl.Instance.death)
+            Move();
         if (transform.position.x < 0) Destroy(gameObject);
     }
 
