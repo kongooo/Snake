@@ -812,6 +812,12 @@ PrefabInstance:
       propertyPath: length
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 4874273341469064708, guid: 60e1cab7c46d06c4bac85b760b457ae5,
+        type: 3}
+      propertyPath: headPrefab
+      value: 
+      objectReference: {fileID: 8208388331193636595, guid: 6bf0bbf27e6ad32419eeb4a8c9a30e50,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60e1cab7c46d06c4bac85b760b457ae5, type: 3}
 --- !u!1001 &6826689915623791291

@@ -167,7 +167,7 @@ public class SnakeControl : MonoBehaviour
 
     public void DeleteBody(int count)
     {
-        if (!death && snake.Count < 2)
+        if (!death && snake.Count <= count) 
         {
             death = true;
             if (SceneManager.GetActiveScene().name != "Scene1")

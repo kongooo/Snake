@@ -18,11 +18,8 @@ public class DrawLine : MonoBehaviour
     {
         _instance = this;
         lineRenderer = GetComponent<LineRenderer>();
-        //lineRenderer.startColor = Color.blue;
-        //lineRenderer.endColor = Color.red;
-        lineRenderer.material.color = Color.white;
-        //lineRenderer.SetColors(Color.red, Color.blue);
-        lineRenderer.SetWidth(0.05f, 0.05f);
+        lineRenderer.startWidth = 0.05f;
+        lineRenderer.endWidth = 0.05f;
     }
 
     private void Update()

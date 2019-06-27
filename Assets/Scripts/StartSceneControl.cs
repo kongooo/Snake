@@ -5,6 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class StartSceneControl : MonoBehaviour
 {
+    private void Update()
+    {
+        Exit();
+    }
+
+    void Exit()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+    }
+
     public void LoadScene1()
     {
         SceneManager.LoadScene("Scene1");

@@ -2,13 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Head : MonoBehaviour
 {
-    private bool power = false, doubleScore = false;
+    private bool power = false, doubleScore = false, show = false;
     public GameObject sheildPrefab;
     public Sprite snakeDizzy, snakeNormal;
     private GameObject tempSheild;
+    private TextMeshProUGUI countDownText;
+    private float timing = 0;
+    public float showTime;
+    private Canvas countCanvas;
+
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name == "Scene1") 
+        {
+            countCanvas = GameObject.Find("CountCanvas").GetComponent<Canvas>();
+            countDownText = GameObject.Find("CountText").GetComponent<TextMeshProUGUI>();
+            countDownText.text = " ";
+        }        
+    }
+
+    private void Update()
+    {
+        if (show) ShowCountDown();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -85,6 +105,7 @@ public class Head : MonoBehaviour
                 Scene1Controller.Instance.ChangeScore(10);
                 gameObject.GetComponent<SpriteRenderer>().sprite = snakeDizzy;
                 Invoke("recoverAuto", SnakeControl.Instance.autoTime);
+                Invoke("StartShowCountDown", SnakeControl.Instance.autoTime - showTime);
                 type = 6;
                 Destroy(collision.gameObject);
                 break;
@@ -105,6 +126,13 @@ public class Head : MonoBehaviour
             case "Success":
                 SnakeControl.Instance.death = true;
                 Scene2Controller.Instance.AfterSuccess();
+                break;
+            case "barrier":
+                if (!SnakeMove4.Instance.death && GetComponent<SpriteRenderer>().color != collision.gameObject.GetComponent<SpriteRenderer>().color)
+                {
+                    SnakeMove4.Instance.death = true;
+                    Scene4Controller.Instance.GameOver();
+                }
                 break;
         }
         if (SceneManager.GetActiveScene().name == "Scene1")
@@ -128,6 +156,19 @@ public class Head : MonoBehaviour
         Scene1Controller.Instance.UpdateSpeed((int)SnakeControl.Instance.speed);
     }
 
+    private void ShowCountDown()
+    {
+        timing += Time.deltaTime;
+        countDownText.text = ((int)(showTime - (int)timing)).ToString();
+        countCanvas.transform.position = transform.position + new Vector3(0, 0.5f, 0);
+    }
+
+    private void StartShowCountDown()
+    {
+        timing = 0;
+        show = true;
+    }
+
     private void recoverPower()
     {
         power = false;
@@ -136,6 +177,8 @@ public class Head : MonoBehaviour
 
     private void recoverAuto()
     {
+        show = false;
+        countDownText.text = "";
         SnakeControl.Instance.autoFindFood = false;
         DrawLine.Instance.lineRenderer.positionCount = 0;
         gameObject.GetComponent<SpriteRenderer>().sprite = snakeNormal;

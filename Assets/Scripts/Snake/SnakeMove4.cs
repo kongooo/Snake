@@ -6,7 +6,7 @@ public class SnakeMove4 : MonoBehaviour
 {
     private static SnakeMove4 _instance;
     public static SnakeMove4 Instance { get { return _instance; } }
-    public GameObject bodyPrefab, tailPrefab;
+    public GameObject bodyPrefab, tailPrefab, headPrefab;
     [HideInInspector] public List<Body> snake = new List<Body>();
     public float space, length, Yspeed, Xspeed, YmaxSpeed;
     public bool death = false;
@@ -30,7 +30,7 @@ public class SnakeMove4 : MonoBehaviour
     void SnakeInit()
     {
         Vector2 pos = transform.position;
-        snake.Add(new Body(gameObject, bodyPrefab, pos));
+        snake.Add(new Body(gameObject, headPrefab, pos));
         snake[0].ShowBody();
         for (int i = 1; i < length; i++)
         {
