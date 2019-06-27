@@ -19,6 +19,7 @@ public class Scene2Controller : MonoBehaviour
         _instance = this;
         endCanvas.planeDistance = 0;
         nextCanvas.planeDistance = 0;
+        UICanvas.planeDistance = 1;
     }
 
     private void Start()
@@ -65,6 +66,16 @@ public class Scene2Controller : MonoBehaviour
         }
     }
 
+    public void GameStop()
+    {
+        UICanvas.planeDistance = 0;
+    }
+
+    public void GameContinue()
+    {
+        UICanvas.planeDistance = 1;
+    }
+
     public void GameAgain()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -101,5 +112,6 @@ public class Scene2Controller : MonoBehaviour
     {
         scoreText.text = (Int32.Parse(scoreText.text) + num).ToString();
     }
+
 
 }

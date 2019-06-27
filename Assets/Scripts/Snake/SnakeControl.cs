@@ -26,6 +26,7 @@ public class SnakeControl : MonoBehaviour
 
     void Awake()
     {
+        Time.timeScale = 1;
         _instance = this;
         InitCameraSize();
         SnakeInit();
@@ -52,7 +53,7 @@ public class SnakeControl : MonoBehaviour
     void SnakeInit()
     {
         Vector2 pos = transform.position;
-        if (SceneManager.GetActiveScene().name != "Scene0")
+        if (SceneManager.GetActiveScene().name != "Scene1")
             pos = new Vector2(-16, 8);
         snake.Add(new Body(gameObject, headPrefab, pos));
         snake[0].ShowBody();
@@ -131,8 +132,8 @@ public class SnakeControl : MonoBehaviour
     void cameraControl()
     {
         float cameraX, cameraY, mapX, mapY;
-        mapX = SceneManager.GetActiveScene().name == "Scene0" ? 40 : 17.5f;
-        mapY = SceneManager.GetActiveScene().name == "Scene0" ? 40 : 10f;
+        mapX = SceneManager.GetActiveScene().name == "Scene1" ? 40 : 17.5f;
+        mapY = SceneManager.GetActiveScene().name == "Scene1" ? 40 : 10f;
         Vector2 cameraCurrentPos = new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.y);
 
         cameraX = Mathf.Abs(snake[0].GetCurrentPos().x) < mapX - cameraWidth ? Mathf.Abs(snake[0].GetCurrentPos().x) : mapX - cameraWidth;
@@ -169,7 +170,7 @@ public class SnakeControl : MonoBehaviour
         if (!death && snake.Count < 2)
         {
             death = true;
-            if (SceneManager.GetActiveScene().name != "Scene0")
+            if (SceneManager.GetActiveScene().name != "Scene1")
                 Scene2Controller.Instance.AfterDeath();
             //else
             //    Scene1Controller.Instance.GameOver();
@@ -188,13 +189,13 @@ public class SnakeControl : MonoBehaviour
 
     void UpdateScene1Length()
     {
-        if (SceneManager.GetActiveScene().name == "Scene0")
+        if (SceneManager.GetActiveScene().name == "Scene1")
             Scene1Controller.Instance.UpdateLength(snake.Count);
     }
 
     void UpdateScene2Length()
     {
-        if (SceneManager.GetActiveScene().name != "Scene0") 
+        if (SceneManager.GetActiveScene().name != "Scene1") 
             Scene2Controller.Instance.UpdateLength(snake.Count);
     }
 }

@@ -13,6 +13,7 @@ public class HorizontalMoveControl : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1;
         _instance = this;
         SnakeInit();
     }

@@ -16,7 +16,7 @@ public class Head : MonoBehaviour
         switch (collision.tag)
         {
             case "food":
-                if (SceneManager.GetActiveScene().name != "Scene0") 
+                if (SceneManager.GetActiveScene().name != "Scene1") 
                 {
                     Scene2Controller.Instance.ChangeScore(100);
                     SnakeControl.Instance.AddBody(1);
@@ -107,7 +107,7 @@ public class Head : MonoBehaviour
                 Scene2Controller.Instance.AfterSuccess();
                 break;
         }
-        if (SceneManager.GetActiveScene().name == "Scene0")
+        if (SceneManager.GetActiveScene().name == "Scene1")
         {
             int x = (int)collision.transform.position.x + 40, y = (int)collision.transform.position.y + 40;
             MapManager.Instance.Grids[x, y].SetUseFul(true);
@@ -118,7 +118,7 @@ public class Head : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (SceneManager.GetActiveScene().name == "Scene0" && collision.gameObject.tag == "wall") 
+        if (SceneManager.GetActiveScene().name == "Scene1" && collision.gameObject.tag == "wall") 
             SnakeControl.Instance.death = true;
     }
 
