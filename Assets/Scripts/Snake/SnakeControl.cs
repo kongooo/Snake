@@ -29,6 +29,10 @@ public class SnakeControl : MonoBehaviour
         Time.timeScale = 1;
         _instance = this;
         InitCameraSize();
+        if (LevelData.Instance != null && LevelData.Instance.StartScene)
+            InitStartData();
+        else
+            InitScene1Data();
         SnakeInit();
     }
 
@@ -40,6 +44,16 @@ public class SnakeControl : MonoBehaviour
             SnakeMoveControl(autoFindFood);
             cameraControl();
         }
+    }
+
+    void InitStartData()
+    {
+        commonSpeed = LevelData.Instance.CommonSpeed;
+    }
+
+    void InitScene1Data()
+    {
+        commonSpeed = LevelData1.Instance.CommonSpeed;
     }
 
     void InitCameraSize()

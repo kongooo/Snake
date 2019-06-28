@@ -23,13 +23,16 @@ public class MapManager : MonoBehaviour
     void Awake()
     {
         _instance = this;
+        if (LevelData.Instance != null && LevelData.Instance.StartScene)
+            InitStartData();
+        else
+            InitScene1Data();
         initWalls();
         initGrids();
         SetCenterGridsState(false);
         RandomWalls();
         RandomProps();
-        SetCenterGridsState(true); ;
-        
+        SetCenterGridsState(true);         
     }
 
     void Start()
@@ -37,6 +40,29 @@ public class MapManager : MonoBehaviour
         SnakeControl.Instance.startMove = true;
     }
 
+    void InitStartData()
+    {
+        badGrassCount = LevelData.Instance.BadGrass;
+        foodCount = LevelData.Instance.Food;
+        sheildCount = LevelData.Instance.Sheild;
+        boomCount = LevelData.Instance.Boom;
+        mushCount = LevelData.Instance.Mush;
+        energyCount = LevelData.Instance.Energy;
+        smartGrassCount = LevelData.Instance.SmartGrass;
+        wallCountAverage = LevelData.Instance.Wall;
+    }
+
+    void InitScene1Data()
+    {
+        badGrassCount = LevelData1.Instance.BadGrass;
+        foodCount = LevelData1.Instance.Food;
+        sheildCount = LevelData1.Instance.Sheild;
+        boomCount = LevelData1.Instance.Boom;
+        mushCount = LevelData1.Instance.Mush;
+        energyCount = LevelData1.Instance.Energy;
+        smartGrassCount = LevelData1.Instance.SmartGrass;
+        wallCountAverage = LevelData1.Instance.Wall;
+    }
 
     public void updatePoints()
     {

@@ -15,6 +15,10 @@ public class HorizontalMoveControl : MonoBehaviour
     {
         Time.timeScale = 1;
         _instance = this;
+        if (LevelData.Instance != null && LevelData.Instance.StartScene)
+            InitStartData();
+        else
+            InitScene4Data();
         SnakeInit();
     }
     private void FixedUpdate()
@@ -23,6 +27,15 @@ public class HorizontalMoveControl : MonoBehaviour
             HorizontalMove();
     }
 
+    void InitStartData()
+    {
+        speed = LevelData.Instance.CommonSpeed;
+    }
+
+    void InitScene4Data()
+    {
+        speed = LevelData4.Instance.CommonSpeed;
+    }
    
     void SnakeInit()
     {

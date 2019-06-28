@@ -18,6 +18,15 @@ public class Scene3Controller : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+        if (LevelData.Instance != null && LevelData.Instance.StartScene)
+        {
+            LevelData.Instance.InitSettingPanel();
+            InitSceneState();
+        }
+        else
+        {
+            LevelData3.Instance.InitSettingPanel();
+        }
         endCanvas.planeDistance = 0;
         UICanvas.planeDistance = 1;
     }
@@ -30,6 +39,11 @@ public class Scene3Controller : MonoBehaviour
     private void Update()
     {
         UpdateDistance();
+    }
+
+    void InitSceneState()
+    {
+        LevelData.Instance.StartScene = false;
     }
 
     public void GameAgain()
@@ -52,6 +66,7 @@ public class Scene3Controller : MonoBehaviour
         EndScoreText.text = scoreText.text;
         UICanvas.gameObject.SetActive(false);
         endCanvas.GetComponent<Canvas>().planeDistance = 100;
+        GameObject.Find("Setting").SetActive(false);
     }
 
     public void UpdateScore(int score)

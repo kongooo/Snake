@@ -15,6 +15,10 @@ public class SnakeMove4 : MonoBehaviour
     {
         Time.timeScale = 1;
         _instance = this;
+        if (LevelData.Instance != null && LevelData.Instance.StartScene)
+            InitStartData();
+        else
+            InitScene4Data();
         SnakeInit();
     }
     private void FixedUpdate()
@@ -26,6 +30,15 @@ public class SnakeMove4 : MonoBehaviour
         }      
     }
 
+    void InitStartData()
+    {
+         Xspeed = LevelData.Instance.ForthSpeed;
+    }
+
+    void InitScene4Data()
+    {
+        Xspeed = LevelData4.Instance.ForthSpeed;
+    }
 
     void SnakeInit()
     {

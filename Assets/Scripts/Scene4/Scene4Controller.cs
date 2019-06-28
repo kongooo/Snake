@@ -16,6 +16,15 @@ public class Scene4Controller : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+        if (LevelData.Instance != null && LevelData.Instance.StartScene)
+        {
+            LevelData.Instance.InitSettingPanel();
+            InitSceneState();
+        }
+        else
+        {
+            LevelData4.Instance.InitSettingPanel();
+        }
         RandomFirstBlock();
         EndCanvas.planeDistance = 0;
     }
@@ -25,11 +34,17 @@ public class Scene4Controller : MonoBehaviour
         UpdateDistance();
     }
 
+    void InitSceneState()
+    {
+        LevelData.Instance.StartScene = false;
+    }
+
     public void GameOver()
     {
         ScoreText.text = DistanceText.text;
         UICanvas.gameObject.SetActive(false);
         EndCanvas.planeDistance = 1;
+        GameObject.Find("Setting").SetActive(false);
     }
 
     public void GameAgain()

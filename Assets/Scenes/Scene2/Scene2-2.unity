@@ -34647,6 +34647,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scene2Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2411924594402171353, guid: d8ca76590ff7c3547aafe773dd0b7ca4,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1335567947}
     - target: {fileID: 2411924594402171352, guid: d8ca76590ff7c3547aafe773dd0b7ca4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -34752,11 +34757,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2411924594402171353, guid: d8ca76590ff7c3547aafe773dd0b7ca4,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1335567947}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8ca76590ff7c3547aafe773dd0b7ca4, type: 3}
 --- !u!4 &2092292856 stripped

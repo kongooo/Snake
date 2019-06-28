@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class StartSceneControl : MonoBehaviour
 {
+    private void Start()
+    {
+        
+    }
     private void Update()
     {
         Exit();
@@ -16,37 +20,9 @@ public class StartSceneControl : MonoBehaviour
             Application.Quit();
     }
 
-    public void LoadScene1()
+    public void SetSettingPanel()
     {
-        SceneManager.LoadScene("Scene1");
-    }
-    public void LoadScene2_1()
-    {
-        SceneManager.LoadScene("Scene2-1");
-    }
-    public void LoadScene2_2()
-    {
-        SceneManager.LoadScene("Scene2-2");
-    }
-    public void LoadScene2_3()
-    {
-        SceneManager.LoadScene("Scene2-3");
-    }
-    public void LoadScene2_4()
-    {
-        SceneManager.LoadScene("Scene2-4");
-    }
-    public void LoadScene3()
-    {
-        SceneManager.LoadScene("Scene3");
-    }
-    public void LoadScene4()
-    {
-        SceneManager.LoadScene("Scene4");
-    }
-
-    public void LoadStartScene()
-    {
-        SceneManager.LoadScene("StartScene");
+        if (LevelData.Instance != null)
+            LevelData.Instance.InitSettingPanel();
     }
 }

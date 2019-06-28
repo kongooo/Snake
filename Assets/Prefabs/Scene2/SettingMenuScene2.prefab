@@ -154,7 +154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 960, y: 540.25525}
+  m_AnchoredPosition: {x: 960, y: 540.2554}
   m_SizeDelta: {x: 1919.9999, y: 1080.5105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3340787382297315958
@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 3340787382486288038}
   - component: {fileID: 3340787382486288037}
   - component: {fileID: 3340787382486288039}
-  - component: {fileID: 3340787382486288056}
+  - component: {fileID: 1653088058396928635}
   m_Layer: 5
   m_Name: LowOpen
   m_TagString: Untagged
@@ -458,7 +458,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &3340787382486288056
+--- !u!114 &1653088058396928635
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -467,9 +467,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3340787382486288057}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e82c6f61b244b54a937f7c227114b2d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cafdb22263156441a5f46372ee69b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Model: 2
+  level: 0
 --- !u!1 &3340787382721507279
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,6 +484,7 @@ GameObject:
   - component: {fileID: 3340787382721507276}
   - component: {fileID: 3340787382721507277}
   - component: {fileID: 3340787382721507278}
+  - component: {fileID: 8248508379344349372}
   m_Layer: 5
   m_Name: LowClose
   m_TagString: Untagged
@@ -678,6 +681,20 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &8248508379344349372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3340787382721507279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cafdb22263156441a5f46372ee69b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Model: 2
+  level: 0
 --- !u!1 &3340787382746000655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,6 +1298,7 @@ GameObject:
   - component: {fileID: 3340787383328565476}
   - component: {fileID: 3340787383328565477}
   - component: {fileID: 3340787383328565478}
+  - component: {fileID: 6929992203696812511}
   m_Layer: 5
   m_Name: HighClose
   m_TagString: Untagged
@@ -1466,6 +1484,20 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &6929992203696812511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3340787383328565496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cafdb22263156441a5f46372ee69b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Model: 2
+  level: 2
 --- !u!1 &3340787383371379064
 GameObject:
   m_ObjectHideFlags: 0
@@ -1746,7 +1778,7 @@ GameObject:
   - component: {fileID: 3340787383494335273}
   - component: {fileID: 3340787383494335274}
   - component: {fileID: 3340787383494335275}
-  - component: {fileID: 3340787383494335276}
+  - component: {fileID: 2804843900606541827}
   m_Layer: 5
   m_Name: MidClose
   m_TagString: Untagged
@@ -1932,7 +1964,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &3340787383494335276
+--- !u!114 &2804843900606541827
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1941,9 +1973,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3340787383494335277}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e82c6f61b244b54a937f7c227114b2d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cafdb22263156441a5f46372ee69b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Model: 2
+  level: 1
 --- !u!1 &3340787383570850818
 GameObject:
   m_ObjectHideFlags: 0
@@ -2217,7 +2251,7 @@ GameObject:
   - component: {fileID: 3340787383708979181}
   - component: {fileID: 3340787383708979182}
   - component: {fileID: 3340787383708979183}
-  - component: {fileID: 3340787383708979168}
+  - component: {fileID: 1058939269151020043}
   m_Layer: 5
   m_Name: HighOpen
   m_TagString: Untagged
@@ -2326,7 +2360,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &3340787383708979168
+--- !u!114 &1058939269151020043
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2335,9 +2369,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3340787383708979169}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e82c6f61b244b54a937f7c227114b2d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cafdb22263156441a5f46372ee69b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Model: 2
+  level: 2
 --- !u!1 &3340787383723139676
 GameObject:
   m_ObjectHideFlags: 0
@@ -2427,6 +2463,7 @@ GameObject:
   - component: {fileID: 3340787383741312136}
   - component: {fileID: 3340787383741312137}
   - component: {fileID: 3340787383741312138}
+  - component: {fileID: 3769539888691011533}
   m_Layer: 5
   m_Name: MidOpen
   m_TagString: Untagged
@@ -2535,6 +2572,20 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &3769539888691011533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3340787383741312139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cafdb22263156441a5f46372ee69b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Model: 2
+  level: 1
 --- !u!1 &3340787383788862587
 GameObject:
   m_ObjectHideFlags: 0
@@ -2789,7 +2840,7 @@ GameObject:
   - component: {fileID: 3340787384018548958}
   - component: {fileID: 3340787384018548959}
   - component: {fileID: 3340787384018548944}
-  - component: {fileID: 3340787384018548945}
+  - component: {fileID: 9084353402988161470}
   m_Layer: 5
   m_Name: Continue
   m_TagString: Untagged
@@ -2943,7 +2994,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &3340787384018548945
+--- !u!114 &9084353402988161470
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2952,11 +3003,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3340787384018548947}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 132db1835f160d847889a3432b49afa0, type: 3}
+  m_Script: {fileID: 11500000, guid: d546a22a785de2241883b216a84b4104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mButton: {fileID: 3340787384018548944}
-  Stop_num: 1
 --- !u!1 &3340787384136204986
 GameObject:
   m_ObjectHideFlags: 0
@@ -3435,8 +3484,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 132db1835f160d847889a3432b49afa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mButton: {fileID: 3340787384221392930}
-  Stop_num: 0
 --- !u!1 &3340787384250988032
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,6 +17,15 @@ public class Scene2Controller : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+        if (LevelData.Instance != null && LevelData.Instance.StartScene)
+        {
+            LevelData.Instance.InitSettingPanel();
+            InitSceneState();
+        }
+        else
+        {
+            LevelData2.Instance.InitSettingPanel();
+        }
         endCanvas.planeDistance = 0;
         nextCanvas.planeDistance = 0;
         UICanvas.planeDistance = 1;
@@ -27,6 +36,11 @@ public class Scene2Controller : MonoBehaviour
         UpdateLevel();
         UpdateLength(SnakeControl.Instance.length);
         UpdateScore(0);
+    }
+
+    void InitSceneState()
+    {
+        LevelData.Instance.StartScene = false;
     }
 
     void UpdateLevel()
@@ -83,11 +97,10 @@ public class Scene2Controller : MonoBehaviour
 
     public void AfterDeath()
     {
-        Debug.Log(endCanvas.planeDistance);
         EndScoreText.text = scoreText.text;
         UICanvas.gameObject.SetActive(false);
         endCanvas.GetComponent<Canvas>().planeDistance = 100;
-        Debug.Log(endCanvas.planeDistance);
+        GameObject.Find("Setting").SetActive(false);
     }
 
     public void AfterSuccess()
@@ -95,6 +108,7 @@ public class Scene2Controller : MonoBehaviour
         SnakeControl.Instance.startMove = false;
         UICanvas.gameObject.SetActive(false);
         nextCanvas.planeDistance = 100;
+        GameObject.Find("Setting").SetActive(false);
     }
 
     public void UpdateLength(int length)

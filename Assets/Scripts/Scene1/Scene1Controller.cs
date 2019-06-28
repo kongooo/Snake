@@ -20,6 +20,15 @@ public class Scene1Controller : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+        if (LevelData.Instance != null && LevelData.Instance.StartScene)
+        {
+            LevelData.Instance.InitSettingPanel();
+            InitSceneState();
+        }
+        else
+        {
+            LevelData1.Instance.InitSettingPanel();
+        }
     }
     private void Start()
     {
@@ -39,11 +48,17 @@ public class Scene1Controller : MonoBehaviour
         }
     }
 
+    void InitSceneState()
+    {
+         LevelData.Instance.StartScene = false;
+    }
+
     public void GameOver()
     {
         ScoreText.text = Score.text;
         UICanvas.gameObject.SetActive(false);
         EndCanvas.planeDistance = 1;
+        GameObject.Find("Setting").SetActive(false);
     }
 
     public void GameAgain()

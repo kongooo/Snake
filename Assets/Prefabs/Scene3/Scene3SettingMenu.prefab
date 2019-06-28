@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 6965231322557219294}
   - component: {fileID: 6965231322557219293}
   - component: {fileID: 6965231322557219292}
-  - component: {fileID: 6965231322557219291}
+  - component: {fileID: 7741339996589957598}
   m_Layer: 5
   m_Name: MidClose
   m_TagString: Untagged
@@ -364,7 +364,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &6965231322557219291
+--- !u!114 &7741339996589957598
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -373,9 +373,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6965231322557219290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e82c6f61b244b54a937f7c227114b2d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cafdb22263156441a5f46372ee69b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Model: 3
+  level: 1
 --- !u!1 &6965231322618072691
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,6 +464,7 @@ GameObject:
   - component: {fileID: 6965231322656420371}
   - component: {fileID: 6965231322656420370}
   - component: {fileID: 6965231322656420369}
+  - component: {fileID: 9021127273163026268}
   m_Layer: 5
   m_Name: HighClose
   m_TagString: Untagged
@@ -647,6 +650,20 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &9021127273163026268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6965231322656420367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cafdb22263156441a5f46372ee69b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Model: 3
+  level: 2
 --- !u!1 &6965231322697493391
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,7 +855,7 @@ GameObject:
   - component: {fileID: 6965231322770920730}
   - component: {fileID: 6965231322770920729}
   - component: {fileID: 6965231322770920728}
-  - component: {fileID: 6965231322770920727}
+  - component: {fileID: 6780513920338589627}
   m_Layer: 5
   m_Name: HighOpen
   m_TagString: Untagged
@@ -947,7 +964,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &6965231322770920727
+--- !u!114 &6780513920338589627
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -956,9 +973,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6965231322770920726}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e82c6f61b244b54a937f7c227114b2d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cafdb22263156441a5f46372ee69b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Model: 3
+  level: 2
 --- !u!1 &6965231322781939883
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,6 +1067,7 @@ GameObject:
   - component: {fileID: 6965231322805188223}
   - component: {fileID: 6965231322805188222}
   - component: {fileID: 6965231322805188221}
+  - component: {fileID: 409723469267592617}
   m_Layer: 5
   m_Name: MidOpen
   m_TagString: Untagged
@@ -1156,6 +1176,20 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &409723469267592617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6965231322805188220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cafdb22263156441a5f46372ee69b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Model: 3
+  level: 1
 --- !u!1 &6965231322900152053
 GameObject:
   m_ObjectHideFlags: 0
@@ -2640,7 +2674,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 960, y: 540.25525}
+  m_AnchoredPosition: {x: 960, y: 540.2554}
   m_SizeDelta: {x: 1919.9999, y: 1080.5105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6965231323771015297
@@ -2727,7 +2761,7 @@ GameObject:
   - component: {fileID: 6965231323959532625}
   - component: {fileID: 6965231323959532626}
   - component: {fileID: 6965231323959532624}
-  - component: {fileID: 6965231323959532623}
+  - component: {fileID: 3826023827368383221}
   m_Layer: 5
   m_Name: LowOpen
   m_TagString: Untagged
@@ -2836,7 +2870,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &6965231323959532623
+--- !u!114 &3826023827368383221
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2845,9 +2879,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6965231323959532622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e82c6f61b244b54a937f7c227114b2d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cafdb22263156441a5f46372ee69b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Model: 3
+  level: 0
 --- !u!1 &6965231324122811435
 GameObject:
   m_ObjectHideFlags: 0
@@ -2962,6 +2998,7 @@ GameObject:
   - component: {fileID: 6965231324194092347}
   - component: {fileID: 6965231324194092346}
   - component: {fileID: 6965231324194092345}
+  - component: {fileID: 427813104406454285}
   m_Layer: 5
   m_Name: LowClose
   m_TagString: Untagged
@@ -3158,6 +3195,20 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &427813104406454285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6965231324194092344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cafdb22263156441a5f46372ee69b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Model: 3
+  level: 0
 --- !u!1 &6965231324220454904
 GameObject:
   m_ObjectHideFlags: 0

@@ -733,11 +733,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingMenu
       objectReference: {fileID: 0}
-    - target: {fileID: 3805106342106777564, guid: 0ff44904df341714683a594ffb9ad50e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3805106342106777563, guid: 0ff44904df341714683a594ffb9ad50e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -808,41 +803,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 493470888}
-    - target: {fileID: 3805106341691046838, guid: 0ff44904df341714683a594ffb9ad50e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3805106341691046838, guid: 0ff44904df341714683a594ffb9ad50e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3805106341691046838, guid: 0ff44904df341714683a594ffb9ad50e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3805106341691046838, guid: 0ff44904df341714683a594ffb9ad50e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3805106341691046838, guid: 0ff44904df341714683a594ffb9ad50e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3805106341691046838, guid: 0ff44904df341714683a594ffb9ad50e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3805106341691046835, guid: 0ff44904df341714683a594ffb9ad50e,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3805106342138477805, guid: 0ff44904df341714683a594ffb9ad50e,
         type: 3}
       propertyPath: m_AnchorMin.x
@@ -895,6 +855,61 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ff44904df341714683a594ffb9ad50e, type: 3}
+--- !u!1 &1637923176
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1637923178}
+  - component: {fileID: 1637923177}
+  m_Layer: 0
+  m_Name: LevelData1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1637923177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637923176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f7e0564dfc58eb49bb68cf5fb5e66e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
+  levelAgo: 0
+  BadGrass: 0
+  Food: 0
+  Sheild: 0
+  Boom: 0
+  Mush: 0
+  Energy: 0
+  SmartGrass: 0
+  Wall: 0
+  CommonSpeed: 0
+  ForthSpeed: 0
+--- !u!4 &1637923178
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637923176}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 55.23941, y: 132.75468, z: -1407.8962}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1746933690 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2191197518617245666, guid: 04ed198aaee827a41a4ebda64751c0d8,
