@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameContinue : MonoBehaviour
 {
-    private bool if_continue = true;
+    [HideInInspector]public bool if_continue = true;
 
     private void Start()
     {
@@ -39,8 +39,13 @@ public class GameContinue : MonoBehaviour
 
 
         if (if_continue)
+        {
             Time.timeScale = 1;
+        }           
         else
+        {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+            
     }
 }

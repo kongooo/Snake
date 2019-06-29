@@ -47,7 +47,8 @@ public class LevelChange : MonoBehaviour
             case 2:
                 LevelData.Instance.SetHardLevel();
                 break;
-        }        
+        }
+        Debug.Log(level);
     }
 
     void ChangeLevel1()
@@ -64,6 +65,7 @@ public class LevelChange : MonoBehaviour
                 LevelData1.Instance.SetHardLevel();
                 break;
         }
+        Debug.Log("Scene1: " + level);
     }
 
     void ChangeLevel2()

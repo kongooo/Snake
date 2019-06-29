@@ -28,11 +28,11 @@ public class SnakeControl : MonoBehaviour
     {
         Time.timeScale = 1;
         _instance = this;
+    }
+
+    private void Start()
+    {
         InitCameraSize();
-        if (LevelData.Instance != null && LevelData.Instance.StartScene)
-            InitStartData();
-        else
-            InitScene1Data();
         SnakeInit();
     }
 
@@ -46,15 +46,7 @@ public class SnakeControl : MonoBehaviour
         }
     }
 
-    void InitStartData()
-    {
-        commonSpeed = LevelData.Instance.CommonSpeed;
-    }
-
-    void InitScene1Data()
-    {
-        commonSpeed = LevelData1.Instance.CommonSpeed;
-    }
+    
 
     void InitCameraSize()
     {
@@ -66,6 +58,7 @@ public class SnakeControl : MonoBehaviour
 
     void SnakeInit()
     {
+        speed = commonSpeed;
         Vector2 pos = transform.position;
         if (SceneManager.GetActiveScene().name != "Scene1")
             pos = new Vector2(-16, 8);
@@ -77,7 +70,6 @@ public class SnakeControl : MonoBehaviour
             snake.Add(new Body(gameObject, bodyPrefab, pos));
             snake[i].ShowBody();
         }
-        speed = commonSpeed;
     }
 
     void directControl()

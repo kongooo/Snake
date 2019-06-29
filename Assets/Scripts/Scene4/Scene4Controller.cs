@@ -18,13 +18,16 @@ public class Scene4Controller : MonoBehaviour
         _instance = this;
         if (LevelData.Instance != null && LevelData.Instance.StartScene)
         {
-            LevelData.Instance.InitSettingPanel();
-            InitSceneState();
+            InitStartData();
         }
         else
         {
-            LevelData4.Instance.InitSettingPanel();
+            InitScene4Data();
         }
+    }
+
+    private void Start()
+    {
         RandomFirstBlock();
         EndCanvas.planeDistance = 0;
     }
@@ -34,9 +37,14 @@ public class Scene4Controller : MonoBehaviour
         UpdateDistance();
     }
 
-    void InitSceneState()
+    void InitStartData()
     {
-        LevelData.Instance.StartScene = false;
+        SnakeMove4.Instance.Xspeed = LevelData.Instance.ForthSpeed;
+    }
+
+    void InitScene4Data()
+    {
+        SnakeMove4.Instance.Xspeed = LevelData4.Instance.ForthSpeed;
     }
 
     public void GameOver()

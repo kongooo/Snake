@@ -6,7 +6,7 @@ public class DiamondControl : MonoBehaviour
 {
     public GameObject[] diamonds;
     public float intervalTime;
-    private float speed;
+    public float speed;
     public int min, max;
     private float timing = 0;
 

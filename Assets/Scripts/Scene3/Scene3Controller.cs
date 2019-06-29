@@ -20,30 +20,35 @@ public class Scene3Controller : MonoBehaviour
         _instance = this;
         if (LevelData.Instance != null && LevelData.Instance.StartScene)
         {
-            LevelData.Instance.InitSettingPanel();
-            InitSceneState();
+            InitStartData();
         }
         else
         {
-            LevelData3.Instance.InitSettingPanel();
+            InitScene3Data();
         }
-        endCanvas.planeDistance = 0;
-        UICanvas.planeDistance = 1;
     }
 
     private void Start()
     {
+        endCanvas.planeDistance = 0;
+        UICanvas.planeDistance = 1;
         UpdateScore(0);
     }
+
 
     private void Update()
     {
         UpdateDistance();
     }
 
-    void InitSceneState()
+    void InitStartData()
     {
-        LevelData.Instance.StartScene = false;
+        HorizontalMoveControl.Instance.speed = LevelData.Instance.CommonSpeed;
+    }
+
+    void InitScene3Data()
+    {
+        HorizontalMoveControl.Instance.speed = LevelData3.Instance.CommonSpeed;
     }
 
     public void GameAgain()
@@ -67,6 +72,7 @@ public class Scene3Controller : MonoBehaviour
         UICanvas.gameObject.SetActive(false);
         endCanvas.GetComponent<Canvas>().planeDistance = 100;
         GameObject.Find("Setting").SetActive(false);
+        Time.timeScale = 0;
     }
 
     public void UpdateScore(int score)

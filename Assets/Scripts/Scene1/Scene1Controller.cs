@@ -16,20 +16,19 @@ public class Scene1Controller : MonoBehaviour
 
     private bool test = false;
 
-
     private void Awake()
     {
         _instance = this;
         if (LevelData.Instance != null && LevelData.Instance.StartScene)
         {
-            LevelData.Instance.InitSettingPanel();
-            InitSceneState();
+            InitStartData();
         }
         else
         {
-            LevelData1.Instance.InitSettingPanel();
+            InitScene1Data();
         }
     }
+
     private void Start()
     {
         UpdateLength(SnakeControl.Instance.length);
@@ -38,6 +37,7 @@ public class Scene1Controller : MonoBehaviour
         EndCanvas.planeDistance = 0;
         UICanvas.planeDistance = 1;
     }
+
 
     void Update()
     {
@@ -48,9 +48,30 @@ public class Scene1Controller : MonoBehaviour
         }
     }
 
-    void InitSceneState()
+    void InitStartData()
     {
-         LevelData.Instance.StartScene = false;
+        MapManager.Instance.badGrassCount = LevelData.Instance.BadGrass;
+        MapManager.Instance.foodCount = LevelData.Instance.Food;
+        MapManager.Instance.sheildCount = LevelData.Instance.Sheild;
+        MapManager.Instance.boomCount = LevelData.Instance.Boom;
+        MapManager.Instance.mushCount = LevelData.Instance.Mush;
+        MapManager.Instance.energyCount = LevelData.Instance.Energy;
+        MapManager.Instance.smartGrassCount = LevelData.Instance.SmartGrass;
+        MapManager.Instance.wallCountAverage = LevelData.Instance.Wall;
+        SnakeControl.Instance.commonSpeed = LevelData.Instance.CommonSpeed;
+    }
+
+    void InitScene1Data()
+    {
+        MapManager.Instance.badGrassCount = LevelData1.Instance.BadGrass;
+        MapManager.Instance.foodCount = LevelData1.Instance.Food;
+        MapManager.Instance.sheildCount = LevelData1.Instance.Sheild;
+        MapManager.Instance.boomCount = LevelData1.Instance.Boom;
+        MapManager.Instance.mushCount = LevelData1.Instance.Mush;
+        MapManager.Instance.energyCount = LevelData1.Instance.Energy;
+        MapManager.Instance.smartGrassCount = LevelData1.Instance.SmartGrass;
+        MapManager.Instance.wallCountAverage = LevelData1.Instance.Wall;
+        SnakeControl.Instance.commonSpeed = LevelData1.Instance.CommonSpeed;
     }
 
     public void GameOver()

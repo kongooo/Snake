@@ -19,28 +19,32 @@ public class Scene2Controller : MonoBehaviour
         _instance = this;
         if (LevelData.Instance != null && LevelData.Instance.StartScene)
         {
-            LevelData.Instance.InitSettingPanel();
-            InitSceneState();
+            InitStartData();
         }
         else
         {
-            LevelData2.Instance.InitSettingPanel();
+            InitScene2Data();
         }
-        endCanvas.planeDistance = 0;
-        nextCanvas.planeDistance = 0;
-        UICanvas.planeDistance = 1;
     }
 
     private void Start()
     {
+        endCanvas.planeDistance = 0;
+        nextCanvas.planeDistance = 0;
+        UICanvas.planeDistance = 1;
         UpdateLevel();
         UpdateLength(SnakeControl.Instance.length);
         UpdateScore(0);
     }
 
-    void InitSceneState()
+    void InitStartData()
     {
-        LevelData.Instance.StartScene = false;
+        SnakeControl.Instance.commonSpeed = LevelData.Instance.CommonSpeed;
+    }
+
+    void InitScene2Data()
+    {
+        SnakeControl.Instance.commonSpeed = LevelData2.Instance.CommonSpeed;
     }
 
     void UpdateLevel()

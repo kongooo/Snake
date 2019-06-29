@@ -78,7 +78,9 @@ public class Head : MonoBehaviour
             case "boom":
                 if (!power)
                 {
-                    SnakeControl.Instance.DeleteBody(SnakeControl.Instance.snake.Count / 2);
+                    int count = SnakeControl.Instance.snake.Count / 2;
+                    if (count == 0) count = 1;
+                    SnakeControl.Instance.DeleteBody(count);
                     Scene1Controller.Instance.MulScore();
                 }
                 type = 0;

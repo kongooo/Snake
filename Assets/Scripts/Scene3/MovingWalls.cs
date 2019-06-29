@@ -6,6 +6,11 @@ public class MovingWalls : MonoBehaviour
 {
     public float speed;
 
+    private void Start()
+    {
+        this.speed = HorizontalMoveControl.Instance.speed;
+    }
+
     void Update()
     {
         if (!HorizontalMoveControl.Instance.death)

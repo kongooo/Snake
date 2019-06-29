@@ -28,19 +28,19 @@ public class LevelData : MonoBehaviour
 
     public void SetEasyLevel()
     {
-        level = Level.Easy;
+        LevelData.Instance.level = Level.Easy;
         InitLevelData();    
     }
 
     public void SetNormalLevel()
     {
-        level = Level.Normal;
+        LevelData.Instance.level = Level.Normal;
         InitLevelData();
     }
     
     public void SetHardLevel()
     {
-        level = Level.Hard;
+        LevelData.Instance.level = Level.Hard;
         InitLevelData();
     }
 
@@ -49,16 +49,22 @@ public class LevelData : MonoBehaviour
         switch ((int)level)
         {
             case 0:
-                GameObject.Find("MidOpen").SetActive(false);
-                GameObject.Find("HighOpen").SetActive(false);
+                if (GameObject.Find("MidOpen") != null)
+                    GameObject.Find("MidOpen").SetActive(false);
+                if (GameObject.Find("HighOpen") != null)
+                    GameObject.Find("HighOpen").SetActive(false);
                 break;
             case 1:
-                GameObject.Find("LowOpen").SetActive(false);
-                GameObject.Find("HighOpen").SetActive(false);
+                if (GameObject.Find("LowOpen") != null)
+                    GameObject.Find("LowOpen").SetActive(false);
+                if (GameObject.Find("HighOpen") != null)
+                    GameObject.Find("HighOpen").SetActive(false);
                 break;
             case 2:
-                GameObject.Find("LowOpen").SetActive(false);
-                GameObject.Find("MidOpen").SetActive(false);
+                if (GameObject.Find("LowOpen") != null)
+                    GameObject.Find("LowOpen").SetActive(false);
+                if (GameObject.Find("MidOpen") != null)
+                    GameObject.Find("MidOpen").SetActive(false);
                 break;
         }
     }
