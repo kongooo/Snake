@@ -16,8 +16,8 @@ public class LevelData4 : MonoBehaviour
         if (_instance == null)
         {
             DontDestroyOnLoad(gameObject);
-            InitLevelData();
             _instance = this;
+            InitLevelData();           
         }
         else
         {
@@ -26,6 +26,7 @@ public class LevelData4 : MonoBehaviour
         if (LevelData.Instance != null && LevelData.Instance.StartScene)
         {
             LevelData4.Instance.level = (LevelData4.Level)LevelData.Instance.level;
+            Debug.Log("change4");
         }
     }
 
@@ -49,7 +50,7 @@ public class LevelData4 : MonoBehaviour
 
     public void InitSettingPanel()
     {
-        switch ((int)level)
+        switch ((int)LevelData4.Instance.level)
         {
             case 0:
                 if (GameObject.Find("MidOpen") != null)
@@ -74,7 +75,7 @@ public class LevelData4 : MonoBehaviour
 
     void InitLevelData()
     {
-        switch (level)
+        switch (LevelData4.Instance.level)
         {
             case Level.Easy:
                 BadGrass = 20;

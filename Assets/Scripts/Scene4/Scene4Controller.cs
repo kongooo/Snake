@@ -21,33 +21,11 @@ public class Scene4Controller : MonoBehaviour
         
     }
 
-    private void OnEnable()
-    {
-        if (LevelData.Instance != null && LevelData.Instance.StartScene)
-        {
-            InitStartData();
-        }
-        else
-        {
-            InitScene4Data();
-        }
-    }
-
     private void Update()
     {
         UpdateDistance();
     }
-
-    void InitStartData()
-    {
-        SnakeMove4.Instance.Xspeed = LevelData.Instance.ForthSpeed;
-    }
-
-    void InitScene4Data()
-    {
-        SnakeMove4.Instance.Xspeed = LevelData4.Instance.ForthSpeed;
-    }
-
+ 
     public void GameOver()
     {
         ScoreText.text = DistanceText.text;

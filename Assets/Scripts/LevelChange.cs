@@ -40,12 +40,24 @@ public class LevelChange : MonoBehaviour
         {
             case 0:
                 LevelData.Instance.SetEasyLevel();
+                LevelData1.Instance.SetEasyLevel();
+                LevelData2.Instance.SetEasyLevel();
+                LevelData3.Instance.SetEasyLevel();
+                LevelData4.Instance.SetEasyLevel();
                 break;
             case 1:
                 LevelData.Instance.SetNormalLevel();
+                LevelData1.Instance.SetNormalLevel();
+                LevelData2.Instance.SetNormalLevel();
+                LevelData3.Instance.SetNormalLevel();
+                LevelData4.Instance.SetNormalLevel();
                 break;
             case 2:
                 LevelData.Instance.SetHardLevel();
+                LevelData1.Instance.SetHardLevel();
+                LevelData2.Instance.SetHardLevel();
+                LevelData3.Instance.SetHardLevel();
+                LevelData4.Instance.SetHardLevel();
                 break;
         }
     }

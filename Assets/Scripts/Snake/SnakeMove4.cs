@@ -17,6 +17,18 @@ public class SnakeMove4 : MonoBehaviour
         _instance = this;
         SnakeInit();
     }
+
+    private void OnEnable()
+    {
+        if (LevelData.Instance != null && LevelData.Instance.StartScene)
+        {
+            InitStartData();
+        }
+        else
+        {
+            InitScene4Data();
+        }
+    }
     private void FixedUpdate()
     {
         if (!death) 
@@ -24,6 +36,16 @@ public class SnakeMove4 : MonoBehaviour
             HorizontalMove();
             CameraControl();
         }      
+    }
+
+    void InitStartData()
+    {
+        Xspeed = LevelData.Instance.ForthSpeed;
+    }
+
+    void InitScene4Data()
+    {
+        Xspeed = LevelData4.Instance.ForthSpeed;
     }
 
     void SnakeInit()

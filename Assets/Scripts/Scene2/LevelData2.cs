@@ -27,6 +27,7 @@ public class LevelData2 : MonoBehaviour
         if (LevelData.Instance != null && LevelData.Instance.StartScene)
         {
             LevelData2.Instance.level = (LevelData2.Level)LevelData.Instance.level;
+            Debug.Log("change2");
         }
     }
 
