@@ -5,19 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class StartSceneControl : MonoBehaviour
 {
-    private void Start()
+    public void ExitGame()
     {
-        
-    }
-    private void Update()
-    {
-        Exit();
-    }
-
-    void Exit()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            Application.Quit();
+        Application.Quit();
     }
 
     public void SetSettingPanel()
