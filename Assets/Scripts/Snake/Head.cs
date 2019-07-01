@@ -8,12 +8,12 @@ public class Head : MonoBehaviour
 {
     private bool power = false, doubleScore = false, show = false;
     public GameObject sheildPrefab;
-    public Sprite snakeDizzy, snakeNormal;
     private GameObject tempSheild;
     private TextMeshProUGUI countDownText;
     private float timing = 0;
     public float showTime;
     private Canvas countCanvas;
+    public Sprite[] dizzySprites, normalSprites;
 
     private void Start()
     {
@@ -58,6 +58,7 @@ public class Head : MonoBehaviour
                     }
                 }
                 type = 2;
+                SoundManager.Instance.PlayAudioEffect(2);
                 Destroy(collision.gameObject);
                 break;
             case "grass":
@@ -66,6 +67,7 @@ public class Head : MonoBehaviour
                     SnakeControl.Instance.DeleteBody(SnakeControl.Instance.grasslength);
                     Scene1Controller.Instance.ChangeScore(-10);
                 }
+                SoundManager.Instance.PlayAudioEffect(6);
                 Destroy(collision.gameObject);
                 type = 4;
                 break;
@@ -73,6 +75,7 @@ public class Head : MonoBehaviour
                 SnakeControl.Instance.AddBody(SnakeControl.Instance.snake.Count);
                 Scene1Controller.Instance.DoubleScore();
                 type = 3;
+                SoundManager.Instance.PlayAudioEffect(2);
                 Destroy(collision.gameObject);
                 break;
             case "boom":
@@ -84,6 +87,7 @@ public class Head : MonoBehaviour
                     Scene1Controller.Instance.MulScore();
                 }
                 type = 0;
+                SoundManager.Instance.PlayAudioEffect(1);
                 Destroy(collision.gameObject);
                 break;
             case "energy":
@@ -91,6 +95,7 @@ public class Head : MonoBehaviour
                 Scene1Controller.Instance.UpdateSpeed((int)SnakeControl.Instance.speed);
                 Invoke("recoverSpeed", SnakeControl.Instance.speedUpTime);
                 type = 1;
+                SoundManager.Instance.PlayAudioEffect(3);
                 Destroy(collision.gameObject);
                 break;
             case "sheild":
@@ -99,16 +104,18 @@ public class Head : MonoBehaviour
                 tempSheild.transform.SetParent(gameObject.transform, true);
                 Invoke("recoverPower", SnakeControl.Instance.powerTime);
                 type = 5;
+                SoundManager.Instance.PlayAudioEffect(4);
                 Destroy(collision.gameObject);
                 break;
             case "SmartGrass":
                 MapManager.Instance.updatePoints();
                 SnakeControl.Instance.autoFindFood = true;
                 Scene1Controller.Instance.ChangeScore(10);
-                gameObject.GetComponent<SpriteRenderer>().sprite = snakeDizzy;
+                gameObject.GetComponent<SpriteRenderer>().sprite = dizzySprites[DontDestroyTool.Instance.getOrder()];
                 Invoke("recoverAuto", SnakeControl.Instance.autoTime);
                 Invoke("StartShowCountDown", SnakeControl.Instance.autoTime - showTime);
                 type = 6;
+                SoundManager.Instance.PlayAudioEffect(2);
                 Destroy(collision.gameObject);
                 break;
             case "key":
@@ -118,11 +125,13 @@ public class Head : MonoBehaviour
             case "diamond":
                 HorizontalMoveControl.Instance.DeleteBody(collision.gameObject.GetComponent<Diamond>().randomNum);
                 Scene3Controller.Instance.ChangeScore(collision.gameObject.GetComponent<Diamond>().randomNum * 5);
+                SoundManager.Instance.PlayAudioEffect(5);
                 Destroy(collision.gameObject);
                 break;
             case "MoveFood":
                 HorizontalMoveControl.Instance.AddBody(collision.gameObject.GetComponent<Diamond>().randomNum);
                 Scene3Controller.Instance.ChangeScore(collision.gameObject.GetComponent<Diamond>().randomNum * 10);
+                SoundManager.Instance.PlayAudioEffect(2);
                 Destroy(collision.gameObject);
                 break;
             case "Success":
@@ -148,8 +157,10 @@ public class Head : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (SceneManager.GetActiveScene().name == "Scene1" && collision.gameObject.tag == "wall") 
+        if (SceneManager.GetActiveScene().name == "Scene1" && collision.gameObject.tag == "wall")
+        {
             SnakeControl.Instance.death = true;
+        }          
     }
 
     private void recoverSpeed()
@@ -183,7 +194,7 @@ public class Head : MonoBehaviour
         countDownText.text = "";
         SnakeControl.Instance.autoFindFood = false;
         DrawLine.Instance.lineRenderer.positionCount = 0;
-        gameObject.GetComponent<SpriteRenderer>().sprite = snakeNormal;
+        gameObject.GetComponent<SpriteRenderer>().sprite = normalSprites[DontDestroyTool.Instance.getOrder()];
     }
 
     private void recoverDouble()

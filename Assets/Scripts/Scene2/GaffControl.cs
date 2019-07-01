@@ -27,6 +27,7 @@ public class GaffControl : MonoBehaviour
         if (timeing >= intervalTime) 
         {
             destinationControl();
+            SoundManager.Instance.PlayAudioEffect(7);
             IntervalShow();
         }
     }

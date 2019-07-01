@@ -56,6 +56,7 @@ public class MoveGaffControl : MonoBehaviour
     void moveControl()
     {
         initRotate();
+        SoundManager.Instance.PlayAudioEffect(0);
         GameObject gaff = GameObject.Instantiate(moveGaff, gameObject.transform.position, Quaternion.Euler(rotate.x, rotate.y, rotate.z));
         gaff.transform.SetParent(gameObject.transform, true);
         gaff.GetComponent<MoveGaff>().distance = this.distance;

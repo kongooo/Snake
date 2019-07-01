@@ -7,6 +7,7 @@ public class HorizontalMoveControl : MonoBehaviour
     private static HorizontalMoveControl _instance;
     public static HorizontalMoveControl Instance { get { return _instance; } }
     public GameObject bodyPrefab, headPrefab;
+    public Sprite[] bodySprites, headSprites;
     [HideInInspector] public List<Body> snake = new List<Body>();
     public float space, length, speed;
     public bool death = false;
@@ -15,12 +16,24 @@ public class HorizontalMoveControl : MonoBehaviour
     {
         Time.timeScale = 1;
         _instance = this;
+        InitSprites();
+    }
+
+    private void Start()
+    {
         SnakeInit();
     }
     private void FixedUpdate()
     {
         if (!death)
             HorizontalMove();
+    }
+
+    void InitSprites()
+    {
+        int order = DontDestroyTool.Instance.getOrder();
+        bodyPrefab.GetComponent<SpriteRenderer>().sprite = bodySprites[order];
+        headPrefab.GetComponent<SpriteRenderer>().sprite = headSprites[order];
     }
 
     void SnakeInit()

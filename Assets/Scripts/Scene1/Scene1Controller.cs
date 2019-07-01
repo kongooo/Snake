@@ -19,6 +19,13 @@ public class Scene1Controller : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+        UpdateScore(50);
+        EndCanvas.planeDistance = 0;
+        UICanvas.planeDistance = 1;        
+    }
+
+    private void OnEnable()
+    {
         if (LevelData.Instance != null && LevelData.Instance.StartScene)
         {
             InitStartData();
@@ -33,9 +40,6 @@ public class Scene1Controller : MonoBehaviour
     {
         UpdateLength(SnakeControl.Instance.length);
         UpdateSpeed((int)SnakeControl.Instance.speed);
-        UpdateScore(50);
-        EndCanvas.planeDistance = 0;
-        UICanvas.planeDistance = 1;
     }
 
 
@@ -44,7 +48,7 @@ public class Scene1Controller : MonoBehaviour
         if (!test && (SnakeControl.Instance.death || GetScore() < 0))
         {
             test = true;
-            GameOver();
+            GameOver();            
         }
     }
 
@@ -80,6 +84,7 @@ public class Scene1Controller : MonoBehaviour
         UICanvas.gameObject.SetActive(false);
         EndCanvas.planeDistance = 1;
         GameObject.Find("Setting").SetActive(false);
+        Time.timeScale = 0;
     }
 
     public void GameAgain()

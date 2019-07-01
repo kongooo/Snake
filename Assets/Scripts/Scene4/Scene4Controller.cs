@@ -16,6 +16,8 @@ public class Scene4Controller : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+        RandomFirstBlock();
+        EndCanvas.planeDistance = 0;
         if (LevelData.Instance != null && LevelData.Instance.StartScene)
         {
             InitStartData();
@@ -24,12 +26,6 @@ public class Scene4Controller : MonoBehaviour
         {
             InitScene4Data();
         }
-    }
-
-    private void Start()
-    {
-        RandomFirstBlock();
-        EndCanvas.planeDistance = 0;
     }
 
     private void Update()

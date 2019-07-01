@@ -17,6 +17,13 @@ public class Scene2Controller : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+
+        endCanvas.planeDistance = 0;
+        nextCanvas.planeDistance = 0;
+        UICanvas.planeDistance = 1;
+        UpdateLevel();
+        UpdateScore(0);
+
         if (LevelData.Instance != null && LevelData.Instance.StartScene)
         {
             InitStartData();
@@ -29,12 +36,7 @@ public class Scene2Controller : MonoBehaviour
 
     private void Start()
     {
-        endCanvas.planeDistance = 0;
-        nextCanvas.planeDistance = 0;
-        UICanvas.planeDistance = 1;
-        UpdateLevel();
         UpdateLength(SnakeControl.Instance.length);
-        UpdateScore(0);
     }
 
     void InitStartData()

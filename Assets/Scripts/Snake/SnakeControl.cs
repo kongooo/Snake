@@ -10,6 +10,7 @@ public class SnakeControl : MonoBehaviour
 
     public GameObject bodyPrefab, headPrefab;
     [HideInInspector] public List<Body> snake = new List<Body>();
+    public Sprite[] bodySprites, headSprites;
 
     public int length, foodLength, grasslength;
     public float space, energySpeed, speedUpTime, commonSpeed, powerTime, autoTime, mouseSensibility;
@@ -28,6 +29,7 @@ public class SnakeControl : MonoBehaviour
     {
         Time.timeScale = 1;
         _instance = this;
+        InitSprites();
     }
 
     private void Start()
@@ -46,7 +48,13 @@ public class SnakeControl : MonoBehaviour
         }
     }
 
-    
+    void InitSprites()
+    {
+        int order = DontDestroyTool.Instance.getOrder();
+        bodyPrefab.GetComponent<SpriteRenderer>().sprite = bodySprites[order];
+        headPrefab.GetComponent<SpriteRenderer>().sprite = headSprites[order];
+
+    }
 
     void InitCameraSize()
     {
