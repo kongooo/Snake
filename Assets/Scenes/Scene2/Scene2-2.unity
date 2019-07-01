@@ -6612,7 +6612,7 @@ Transform:
   - {fileID: 1385653330}
   - {fileID: 1598879217}
   m_Father: {fileID: 1456352200}
-  m_RootOrder: 13
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &409549880
 PrefabInstance:
@@ -10039,7 +10039,7 @@ PrefabInstance:
     - target: {fileID: 2903255038619166083, guid: a24f3856db7d5614487c9819acf6bf69,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2903255038619166083, guid: a24f3856db7d5614487c9819acf6bf69,
         type: 3}
@@ -12678,7 +12678,7 @@ PrefabInstance:
     - target: {fileID: 555630464181723790, guid: aaf5527b5056f214f8977ea54665b7f5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 555630464181723790, guid: aaf5527b5056f214f8977ea54665b7f5,
         type: 3}
@@ -18328,21 +18328,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 1525174470}
-    - target: {fileID: 3340787384018548944, guid: 6f176e4a64bf41c47ac2e4caf1c1a15d,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
-      value: GameContinue
-      objectReference: {fileID: 0}
     - target: {fileID: 3340787384221392930, guid: 6f176e4a64bf41c47ac2e4caf1c1a15d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 1525174470}
-    - target: {fileID: 3340787384221392930, guid: 6f176e4a64bf41c47ac2e4caf1c1a15d,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
-      value: GameStop
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f176e4a64bf41c47ac2e4caf1c1a15d, type: 3}
 --- !u!1001 &1161924828
@@ -23498,9 +23488,9 @@ Transform:
   - {fileID: 1035990345}
   - {fileID: 183504027}
   - {fileID: 1689845397}
-  - {fileID: 408777279}
   - {fileID: 635941950}
   - {fileID: 735906444}
+  - {fileID: 408777279}
   - {fileID: 2012162201}
   - {fileID: 1106483575}
   m_Father: {fileID: 0}
@@ -32755,6 +32745,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.06666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 5512352788319207371, guid: 4395faed8cb89e740916ce44bcf5fb39,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4395faed8cb89e740916ce44bcf5fb39, type: 3}

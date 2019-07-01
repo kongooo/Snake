@@ -55,12 +55,12 @@ public class Body : MonoBehaviour
         switch (collision.tag)
         {
             case "gaff":
-                Debug.Log("gaff");
                 SnakeControl.Instance.DeleteBody(1);
                 Scene2Controller.Instance.ChangeScore(-50);
                 break;
             case "monster":
-                SnakeControl.Instance.DeleteBody(1);
+                SnakeControl.Instance.death = true;
+                Scene2Controller.Instance.AfterDeath();
                 break;
             case "line":
                 GetComponent<SpriteRenderer>().color = collision.gameObject.GetComponent<SpriteRenderer>().color;

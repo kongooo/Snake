@@ -18,6 +18,11 @@ public class Scene4Controller : MonoBehaviour
         _instance = this;
         RandomFirstBlock();
         EndCanvas.planeDistance = 0;
+        
+    }
+
+    private void OnEnable()
+    {
         if (LevelData.Instance != null && LevelData.Instance.StartScene)
         {
             InitStartData();

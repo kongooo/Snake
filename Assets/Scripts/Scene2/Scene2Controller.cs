@@ -106,7 +106,8 @@ public class Scene2Controller : MonoBehaviour
         EndScoreText.text = scoreText.text;
         UICanvas.gameObject.SetActive(false);
         endCanvas.GetComponent<Canvas>().planeDistance = 100;
-        GameObject.Find("Setting").SetActive(false);
+        if (GameObject.Find("Setting") != null)
+            GameObject.Find("Setting").SetActive(false);
     }
 
     public void AfterSuccess()
@@ -114,7 +115,8 @@ public class Scene2Controller : MonoBehaviour
         SnakeControl.Instance.startMove = false;
         UICanvas.gameObject.SetActive(false);
         nextCanvas.planeDistance = 100;
-        GameObject.Find("Setting").SetActive(false);
+        if (GameObject.Find("Setting") != null)
+            GameObject.Find("Setting").SetActive(false);
     }
 
     public void UpdateLength(int length)
